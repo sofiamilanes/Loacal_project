@@ -4,30 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Project</title>
 </head>
 <body>
-    <h1>Welcome to "NAME OF PLACE" </h1>
-    <h3>Please create an account</h3>
-    <form action="/homepage" method="POST"> 
-        <label for="first_name">First Name:</label>
-        <input type="text" name="first_name" id ="first_name">
+    <div class="contaier"></div>
+        <h1>Welcome to "NAME OF PLACE" </h1>
+        <h3>Please create an account</h3>
+        <div id='account-form'>
+            <form action="/homepage" method="POST"> 
+                <label for="first_name">First Name:</label>
+                <input type="text" name="first_name" id ="first_name">
 
-        <label for="last_name">Last Name:</label>
-        <input type="text" name="last_name" id ="last_name">
+                <label for="last_name">Last Name:</label>
+                <input type="text" name="last_name" id ="last_name">
 
-        <label for="email">Email:</label>
-        <input type="text" name="email" id ="email">
+                <label for="email">Email:</label>
+                <input type="text" name="email" id ="email">
 
-        <label for="password">Password:</label>
-        <input type="password" name="password" id ="password">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id ="password">
 
-        <label for="conf-password">Confirm Password:</label>
-        <input type="password" name="conf-password" id ="conf-password">
+                <label for="conf-password">Confirm Password:</label>
+                <input type="password" name="conf-password" id ="conf-password">
 
-        <button type="submit">Create User</button>
-    </form>
-
+                <button type="submit">Create User</button>
+            </form>
+        </div>
+    </div>
     <h4>Already have an account? <a href="/login">log in</a></h4>
 </body>
 </html>

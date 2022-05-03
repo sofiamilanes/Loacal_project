@@ -1,0 +1,10 @@
+.contaier{
+    display: flex;
+}
+h1{
+    color: aqua;
+}
+#account-form{
+    background-color: aquamarine;
+    display: block;
+}

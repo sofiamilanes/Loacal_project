@@ -77,4 +77,4 @@ class Type_of_place(db.Model):
 if __name__ == "__main__":
     from server import app
 
-    connect_to_db(app, "users")
+    connect_to_db(app, 'users') #"users" changed after creating crud.py
