@@ -22,6 +22,7 @@ class User(db.Model):
     fname = db.Column(db.String(50), nullable=False)
     lname = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(255), nullable=False)
+    password = db.Column(db.String(255), nullable=False)
 
     rating = db.relationship("Ratings", back_populates="user") #!user or users 
     fav_place = db.relationship("User_fav_places", back_populates="user")

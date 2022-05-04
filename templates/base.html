@@ -6,32 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/style.css">
     <title>Project</title>
+
 </head>
 <body>
-    <div class="contaier"></div>
-        <h1>Welcome to "NAME OF PLACE" </h1>
-        <h3>Please create an account</h3>
-        <div id='account-form'>
-            <form action="/homepage" method="POST"> 
-                <label for="first_name">First Name:</label>
-                <input type="text" name="first_name" id ="first_name">
 
-                <label for="last_name">Last Name:</label>
-                <input type="text" name="last_name" id ="last_name">
+<div class="container">
 
-                <label for="email">Email:</label>
-                <input type="text" name="email" id ="email">
+  <!-- Show flashed messages -->
+  {% with messages = get_flashed_messages() %}
+      {% for message in messages %}
+          <div class="alert alert-warning">{{ message }}</div>
+      {% endfor %}
+  {% endwith %}
 
-                <label for="password">Password:</label>
-                <input type="password" name="password" id ="password">
+  <!-- This is where the main content goes. -->
+  {% block body %}
+      BODY OF PAGE GOES HERE VIA INHERITANCE
+  {% endblock %}
 
-                <label for="conf-password">Confirm Password:</label>
-                <input type="password" name="conf-password" id ="conf-password">
+</div>
 
-                <button type="submit">Create User</button>
-            </form>
-        </div>
-    </div>
-    <h4>Already have an account? <a href="/login">log in</a></h4>
 </body>
 </html>
