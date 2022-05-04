@@ -1,0 +1,35 @@
+
+{% extends 'base.html' %}
+
+
+
+{% block body %}
+<body>
+    <h1>Welcome to "NAME OF PLACE" </h1>
+    <h3>Please create an account</h3>
+    <div id='account-form'>
+        <form action="/registration" method="POST"> 
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name" id ="first_name" required>
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" name="last_name" id ="last_name" required>
+
+            <label for="email">Email:</label>
+            <input type="text" name="email" id ="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" id ="password" required>
+
+            <label for="conf-password">Confirm Password:</label>
+            <input type="password" name="conf-password" id ="conf-password" required>
+
+            <button type="submit">Create User</button>
+        </form>
+    </div>
+    <div>
+    <p>Already have an account? <a href="/login">Log in</a></p>
+    </div>
+    <div>Continue as guest! <a href="/homepage"> Guest</a></div>
+</body>
+{% endblock %}

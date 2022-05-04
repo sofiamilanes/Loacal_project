@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<body>
+    <div>
+        {% if 'email' in session %}
+    <h1>Welcome {{session['first_name']}}!</h1>
+    <div>
+        <a href="/logout">Log out</a>
+    </div>
+        {% else %}
+    <h1> Welcome! </h1> 
+
+    <div>
+        <p> Don't have an account yet? <a href="/">Create account</a></p>
+    </div>
+        {% endif %}
+    <form action='/results' method="POST">
+
+        <label for="lang-select">Choose a type:</label>
+
+        <select name="type" id="place-type">
+          <option value="Coffee">Coffee & Tea</option>
+          <option value="restaurants">Restaurants</option>
+          <option value="bakery">Bakery</option>
+          <option value="bars">Bars</option>
+          <option value="desserts">Desserts</option>
+          <option value="floral">Floral</option>
+        </select>
+
+        <label for="city"> What city:</label>
+        <input type="text" name="location" id ="location">
+
+        <button type="submit"> Search </button>
+
+
+
+
+
+    </form>
+    </div>
+</body>
+{% endblock %}
