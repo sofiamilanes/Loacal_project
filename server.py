@@ -21,9 +21,15 @@ def login():
     """shows log in from """
     return render_template('login.html')
 
+@app.route('/logout')
+def logout():
+    del session['email']
+
+    return redirect('/')
+
 @app.route('/authentication', methods = ['POST'])
 def authentication():
-    """gets the information from log in and makes sure this person is in the database"""
+    """gets the information from '/login' and makes sure this person is in the database"""
     email = request.form['email']
     password = request.form['password']
 
@@ -32,22 +38,13 @@ def authentication():
     if user:
         if password == user.password:
             session["first_name"] = user.fname
-            print(session['first_name'])
+            session['email'] = user.email  #*this will be used later for log out button 
             return redirect('/homepage')
 
     flash("Incorrect password or email. Please try again")
     return redirect('/login')
 
 
-    # if email != session['email']: #! need to change this to check on the db not session
-    #     flash("Incorrect password or email. Please try again")
-    #     return redirect('/login')
-    # if password != session['password']:#! need to change this to check on the db not session
-    #     flash("Incorrect password or email. Please try again")
-    #     return redirect('/login')
-    # return redirect('/homepage')
-
-#! need to figure out how to get then name onto the page without session 
 @app.route('/homepage')
 def homepage():
 
@@ -64,6 +61,7 @@ def registration():
 
 
     if request.form['conf-password'] != password:
+        print('cant')
         flash("passwords did not match please try again")
         return redirect('/')
 
@@ -82,20 +80,6 @@ def registration():
     return redirect('/login')
 
 
-
-    # else:
-    #     session['first_name'] = request.form['first_name']
-    #     session['last_name'] = request.form['last_name']
-    #     session['email'] = request.form['email']
-    #     session['password'] = request.form['password']
-
-    #     crud.create_user(fname = session['first_name'],
-    #                     lname = session['last_name'],
-    #                     email=session['email'],
-    #                     password=session['password'] )
-
-
-    # return redirect('/homepage')
 
 
 @app.route('/results', methods = ["POST"])
