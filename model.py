@@ -68,6 +68,7 @@ class User_fav_places(db.Model):
     user = db.relationship("User", back_populates="fav_place") #!
 
 
+
 class Type_of_place(db.Model):
 
     __tablename__ = "type_of_place"

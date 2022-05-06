@@ -3,7 +3,7 @@ import requests
 import os 
 
 
-API_KEY = "IYZHwT9xb-ceOmUpx_dYwT-EofWFDND-lV1bihPPDQjS827oyD5Lj6MTIcKW2MInvAAGzeSdngqazfkHQ7EF-YoN2FTUwXIxlJDERJUppE19cXMCr3gQ-KLptohwYnYx"
+API_KEY = ""
 url = "https://api.yelp.com/v3/businesses/search"
 HEADER = {'Authorization': 'Bearer %s ' % API_KEY}
 

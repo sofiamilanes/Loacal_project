@@ -148,36 +148,41 @@ def results_info(id):
 
 @app.route('/<id>/add_fav')
 def add_fav(id):
-
+    """this code will check in the place is already on the fav list and it is, its will add it to the middle table """
     results = search_by_id(id)
 
     print(results)
-    
-    logged_in_email = session.get('email')#! need to remove the add to favorite if not logged in 
+    check_db_place = crud.search_by_ylpid(id)
+    print(check_db_place)
 
+    logged_in_email = session.get('email')#! need to remove the add to favorite if not logged in 
+    user = crud.get_user_by_email(logged_in_email)
     if logged_in_email == None:
-        # print(session['email'])
-        # print('its hitings this line')
         flash(" You have to log in to add to favorites!")
-    else:
-        print("should run this ")
+
+    #* if the palce is not the db, it will add it to db and the middle table
+    if check_db_place == None:
+
         place_ylp_id = results['id']
         name = results['name']
         city = results['location']['city']
         zip_code = results['location']['zip_code']
         address = results['location']['address1']
         place = crud.create_place(place_ylp_id = place_ylp_id, name=name, city=city, zip_code= zip_code, address=address)
+        print(place)
+        print(place.place_id)
 
-        # user = crud.get_user_by_email(logged_in_email)
-        # print(user.user_id)
-        # place = crud.create_place(place_ylp_id = place_ylp_id, name=name, city=city, zip_code= zip_code, address=address)
-        # print(place.place_id)
-        # crud.create_fav_place(place.place_id, user.user_id)
+        crud.create_fav_place(place.place_id, user.user_id)
 
-    return results
+    else:
+        crud.create_fav_place(check_db_place.place_id, user.user_id)
 
+    return render_template('favorites.html')
 
+@app.route('/favorite_places')
+def fav_list():
 
+    return render_template('favorites.html')
 
 
 if __name__ == '__main__':
