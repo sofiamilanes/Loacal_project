@@ -1,7 +1,7 @@
 
-import email
+
 from flask import Flask, render_template, redirect, request, session, flash
-from yelp_search import get_results
+from yelp_search import get_results, search_by_id
 from model import connect_to_db
 import crud
 from jinja2 import StrictUndefined
@@ -85,16 +85,96 @@ def registration():
 @app.route('/results', methods = ["POST"])
 
 def results():
-    list_of_places = []
+    # list_of_places = []
+    # term = request.form['type']
+    # location = request.form['location']
+
+    # results = get_results(term, location)
+    # for place in results['businesses']:
+    #     list_of_places.append(place)
+    #     session['list'] = list_of_places
+    # print(session['list'][0])
+    # return render_template('results.html', results = list_of_places)
+    
+    del session['list']
+
+    session['list'] = {}
+    print(session['list'])
+
     term = request.form['type']
     location = request.form['location']
 
     results = get_results(term, location)
     for place in results['businesses']:
-        list_of_places.append(place)
+        session['list'][place['id']] = {}
+        session['list'][place['id']]['name'] =[place][0]["name"]
+        session['list'][place['id']]['id'] =[place][0]["id"]
+        session['list'][place['id']]['address'] =[place][0]["location"]['address1']
 
-    return render_template('results.html', results = list_of_places)
 
+    
+
+    print(place['id']) 
+    print(session['list'])
+
+
+    # results = get_results(term, location)
+    # for place in results['businesses']:
+    #     session['list'][place['id']] = [place] 
+    #     # print(session['list'])
+
+    return redirect('/results')
+
+    # return render_template('results.html', results = session['list'])
+
+
+
+
+
+@app.route('/results')
+def results2():
+
+    return render_template('results.html', results = session['list'])
+
+
+@app.route('/results/<id>')
+def results_info(id):
+
+    results = search_by_id(id)
+
+
+    return render_template('results_details.html', results = results)
+
+
+@app.route('/<id>/add_fav')
+def add_fav(id):
+
+    results = search_by_id(id)
+
+    print(results)
+    
+    logged_in_email = session.get('email')#! need to remove the add to favorite if not logged in 
+
+    if logged_in_email == None:
+        # print(session['email'])
+        # print('its hitings this line')
+        flash(" You have to log in to add to favorites!")
+    else:
+        print("should run this ")
+        place_ylp_id = results['id']
+        name = results['name']
+        city = results['location']['city']
+        zip_code = results['location']['zip_code']
+        address = results['location']['address1']
+        place = crud.create_place(place_ylp_id = place_ylp_id, name=name, city=city, zip_code= zip_code, address=address)
+
+        # user = crud.get_user_by_email(logged_in_email)
+        # print(user.user_id)
+        # place = crud.create_place(place_ylp_id = place_ylp_id, name=name, city=city, zip_code= zip_code, address=address)
+        # print(place.place_id)
+        # crud.create_fav_place(place.place_id, user.user_id)
+
+    return results
 
 
 

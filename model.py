@@ -1,5 +1,6 @@
 # from email.policy import default
 # from xmlrpc.client import boolean
+from enum import unique
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -31,6 +32,7 @@ class Places(db.Model):
     __tablename__ = "places"
 
     place_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    place_ylp_id = db.Column(db.String(255), unique =True, nullable=False)
     name = db.Column(db.String(50), nullable=False)
     city = db.Column(db.String(50), nullable=False)
     zip_code = db.Column(db.Integer, nullable=False)

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+
+{% block body %}
+
+<body>
+    <div class = 'title'>
+            <h2>{{results.name}}</h2>
+    </div>
+    {% if 'email' in  session %}
+    <a href="/{{results.id}}/add_fav">Add to favorite</a>
+    {% endif %}
+    <div class = "categories">
+
+        {{results.categories[0].title}}
+
+    </div>
+    <div class = img>
+        <img src="{{results.image_url}}" alt="{{results.name}} img">
+    </div>
+    <div class = "address">
+         <h4>Address: </h4>
+        <address> 
+            <p>{{results.location.address1}},</p>        
+            <p>{{results.location.city}}</p>
+            <p>{{results.location.zip_code}}</p>
+        </address>
+
+    <div class = 'contact'>
+
+    </div>
+
+    <p>Phone number: {{results.display_phone}}</p>
+        
+    </div>
+
+    <a href="/results"> look up different location</a>
+
+
+
+
+
+
+</body>
+
+
+
+
+
+{% endblock %}
