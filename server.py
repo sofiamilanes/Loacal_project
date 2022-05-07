@@ -177,12 +177,18 @@ def add_fav(id):
     else:
         crud.create_fav_place(check_db_place.place_id, user.user_id)
 
-    return render_template('favorites.html')
+    return redirect('/favorite_places')
 
 @app.route('/favorite_places')
 def fav_list():
+    logged_in_email = session.get('email')#! need to remove the add to favorite if not logged in 
+    user = crud.get_user_by_email(logged_in_email)
+    favs = crud.get_fav_by_user(user.user_id)
+    print(f' THIS IS THE USER{user.user_id}')
+    for fav in favs:
+        print(fav)
 
-    return render_template('favorites.html')
+    return render_template('favorites.html', favorites = favs)
 
 
 if __name__ == '__main__':

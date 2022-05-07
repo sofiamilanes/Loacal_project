@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+
+{% block body %}
+<body>
+    <h2>Welcome to your favorites!</h2>
+   {% for fav in favorites%}
+
+   <p>{{fav[0]}}</p>
+   <a href='results/{{fav[1]}}'> View details</a>
+    {% endfor%}
+
+</body>
+</html>
+{% endblock %}
