@@ -3,14 +3,16 @@
 
 
 {% block body %}
-<body>
-    <h2>Welcome to your favorites!</h2>
-   {% for fav in favorites%}
-
-   <p>{{fav[0]}}</p>
-   <a href='results/{{fav[1]}}'> View details</a>
-    {% endfor%}
-
+<body class="text-center">
+    <div class="container">
+        <h2>Welcome to your favorites!</h2>
+        {% for fav in favorites%}
+            <div class="results">
+                <h4>{{fav[0]}}</h4>
+                <a href='results/{{fav[1]}}'> View details</a>
+            </div>
+        {% endfor%}
+    </div>
 </body>
 </html>
 {% endblock %}

@@ -36,7 +36,7 @@ class Places(db.Model):
     name = db.Column(db.String(50), nullable=False)
     city = db.Column(db.String(50), nullable=False)
     zip_code = db.Column(db.Integer, nullable=False)
-    address = db.Column(db.String(50), nullable=False)
+    address = db.Column(db.String(50), nullable=True)
 
     rating = db.relationship("Ratings", back_populates="place") #! places or place
     fav_place = db.relationship("User_fav_places", back_populates="place")

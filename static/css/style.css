@@ -1,18 +1,93 @@
-.contaier{
-    display: flex;
+.container{
+    padding: 50px;
+
 }
-h1{
-    color: aqua;
+
+h2{
+    color: rgb(60, 88, 88);
+    padding: 50px;
 }
-#account-form{
-    background-color: aquamarine;
-    display: block;
+h3{
+    padding: 30px;
+    background-color: rgb(157, 200, 200);
 }
+
 .alert-warning {
     color: rgb(139, 3, 3);
-  }
+}
+
+#account-form{
+    background-color: aliceblue;
+    width: 100%;
+    padding: 30px;
+    margin: 0 auto;
+    max-width: 330px;
+}
+#login-form{
+    width: 100%;
+    padding: 15px;
+    margin: 0 auto;
+    max-width: 300px;
+}
+
+#results-form{
+    padding-top: 100;
+    width: 100%;
+    padding: 15px;
+    margin: 0 auto;
+    max-width: 300px;
+}
+body{
+    color: blue;
+}
 img{
-    height: 20%;
-    width: 25%;
-    object-fit: contain;
-  }
+    /* border: 5px solid rgb(173, 80, 210); */
+    margin: 30px;
+    width: 330px;
+    height: 400px;
+}
+
+/* This is the hover one */
+img:hover{
+
+-webkit-transform: scale(1.2);
+-ms-transform: scale(1.2);
+transform: scale(1.2);
+transition: 1s ease;  
+}
+.address{
+    margin-top: 30px;
+    background-color: rgb(157, 200, 200);
+    max-width: 100%;
+}
+
+.results{
+background-color: aliceblue;
+    padding: 30px;
+}
+
+.btn{
+    margin: 30px;
+}
+
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #a0e9e9;
+    color: white;
+    text-align: center;
+}
+/*  */
+.image-info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+table {
+    border: 2px solid rgb(24, 72, 56);
+    letter-spacing: 2px;
+
+}

@@ -5,13 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <title>Project</title>
+
 
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg" style="background-color: #a0e9e9;">
+        <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">Support the locals</span>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          {% if 'email' in session%}
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/homepage">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/favorite_places">Favorites</a>
+              </li>
+            </ul>
+          </div>
+          <a class="nav-link" href="/logout">Log out</a>
+            {% else %}
 
-<div class="container">
-
+            <a class="nav-link" href="/login">Log in</a>
+          {% endif%}
+        </div>
+      </nav>
   <!-- Show flashed messages -->
   {% for message in get_flashed_messages() %}
           <div class="alert alert-warning">{{ message }}</div>
@@ -24,6 +48,11 @@
   {% endblock %}
 
 </div>
+<footer>
+    <div class="container-fluid">
+        <p>supporting the locals</p>
 
+    </div>
+</footer>
 </body>
 </html>

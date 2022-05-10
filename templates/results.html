@@ -2,24 +2,31 @@
 
 {% block body %}
 
-<body>
+<body class="text-center">
+    <div class="container">
+
     {% for result in results %}
-    <div class = "title">
-        <h3>{{results[result].name}}</h3>
-        <a href="/results/{{results[result].id}}">View more details</a>
+        <div class = "row">
+            <div class="results">
+                <div class="col-12">
+                <h4>{{results[result].name}}</h4>
+                <p>Location: {{results[result].city}}, {{results[result].state}}</p>
+                
+            </div>
 
-    </div>
-    <div class = "address" >
-
-    </div>
+            <div class="col-12">
+                <a href="/results/{{results[result].id}}">View more details</a>
+                </div>
+            </div>
+        </div>
 
 
 
     {% endfor %}
-<div>
-    <a href="/homepage"> Search another place</a>
-</div>
-
+        <div>
+            <a href="/homepage" class="btn btn-secondary"> Search for another place</a>
+        </div>
+    </div>
 </body>
 
 

@@ -1,4 +1,5 @@
 
+from unicodedata import category
 import requests
 import os 
 
@@ -12,9 +13,10 @@ HEADER = {'Authorization': 'Bearer %s ' % API_KEY}
 def get_results(term, location):
 
     url_params = {
-    'term': f"local {term}",
+    'term': f"locally {term}",
     'location': location,
-    'limit': 15
+    'limit': 20,
+    'radius': 35000
     }
 
     res =  requests.get(url, headers=HEADER, params=url_params)

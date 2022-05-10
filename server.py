@@ -5,6 +5,7 @@ from yelp_search import get_results, search_by_id
 from model import connect_to_db
 import crud
 from jinja2 import StrictUndefined
+import datetime
 
 app = Flask(__name__)
 app.secret_key = "SECTRET KEY"
@@ -13,6 +14,8 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def index():
     """returns registarion form"""
+    if 'email' in session:
+        return redirect('/homepage')
 
     return render_template('register.html')
 
@@ -61,7 +64,7 @@ def registration():
 
 
     if request.form['conf-password'] != password:
-        print('cant')
+        # print('cant')
         flash("passwords did not match please try again")
         return redirect('/')
 
@@ -95,33 +98,27 @@ def results():
     #     session['list'] = list_of_places
     # print(session['list'][0])
     # return render_template('results.html', results = list_of_places)
-    
+
     del session['list']
 
     session['list'] = {}
-    print(session['list'])
+    # print(session['list'])
 
     term = request.form['type']
     location = request.form['location']
 
     results = get_results(term, location)
-    for place in results['businesses']:
-        session['list'][place['id']] = {}
-        session['list'][place['id']]['name'] =[place][0]["name"]
-        session['list'][place['id']]['id'] =[place][0]["id"]
-        session['list'][place['id']]['address'] =[place][0]["location"]['address1']
+    if 'businesses' not in results:
+        flash("Invalid City Please Try Again")
+        return redirect('/homepage')
+    else:
+        for place in results['businesses']:
+            session['list'][place['id']] = {}
+            session['list'][place['id']]['name'] =[place][0]["name"]
+            session['list'][place['id']]['id'] =[place][0]["id"]
+            session['list'][place['id']]['city'] =[place][0]["location"]['city']
+            session['list'][place['id']]['state'] =[place][0]["location"]['state']
 
-
-    
-
-    print(place['id']) 
-    print(session['list'])
-
-
-    # results = get_results(term, location)
-    # for place in results['businesses']:
-    #     session['list'][place['id']] = [place] 
-    #     # print(session['list'])
 
     return redirect('/results')
 
@@ -134,16 +131,21 @@ def results():
 @app.route('/results')
 def results2():
 
-    return render_template('results.html', results = session['list'])
+    results = session['list']
+
+
+    return render_template('results.html', results = results)
 
 
 @app.route('/results/<id>')
 def results_info(id):
 
     results = search_by_id(id)
+    #* This is sending the days to the html for me to use (days)
+    Days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    print(results)
 
-
-    return render_template('results_details.html', results = results)
+    return render_template('results_details.html', results = results, days = Days)
 
 
 @app.route('/<id>/add_fav')
@@ -151,12 +153,15 @@ def add_fav(id):
     """this code will check in the place is already on the fav list and it is, its will add it to the middle table """
     results = search_by_id(id)
 
-    print(results)
+    # print(results)
     check_db_place = crud.search_by_ylpid(id)
-    print(check_db_place)
+    # print(check_db_place)
 
     logged_in_email = session.get('email')#! need to remove the add to favorite if not logged in 
     user = crud.get_user_by_email(logged_in_email)
+
+
+
     if logged_in_email == None:
         flash(" You have to log in to add to favorites!")
 
@@ -169,13 +174,18 @@ def add_fav(id):
         zip_code = results['location']['zip_code']
         address = results['location']['address1']
         place = crud.create_place(place_ylp_id = place_ylp_id, name=name, city=city, zip_code= zip_code, address=address)
-        print(place)
-        print(place.place_id)
+        # print(place)
+        # print(place.place_id)
 
         crud.create_fav_place(place.place_id, user.user_id)
-
+#!
     else:
-        crud.create_fav_place(check_db_place.place_id, user.user_id)
+        in_fav = crud.get_by_place_user(user.user_id, check_db_place.place_id)
+        if in_fav != None:
+            flash("Already added to favorites")
+            return redirect ('/favorite_places')
+        else:
+            crud.create_fav_place(check_db_place.place_id, user.user_id)
 
     return redirect('/favorite_places')
 
@@ -184,9 +194,9 @@ def fav_list():
     logged_in_email = session.get('email')#! need to remove the add to favorite if not logged in 
     user = crud.get_user_by_email(logged_in_email)
     favs = crud.get_fav_by_user(user.user_id)
-    print(f' THIS IS THE USER{user.user_id}')
-    for fav in favs:
-        print(fav)
+    # print(f' THIS IS THE USER{user.user_id}')
+    # for fav in favs:
+    #     print(fav)
 
     return render_template('favorites.html', favorites = favs)
 

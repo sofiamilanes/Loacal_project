@@ -1,45 +1,45 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<body>
-    <div>
-        {% if 'email' in session %}
-    <h1>Welcome {{session['first_name']}}!</h1>
-    <div>
-        <a href="/logout">Log out</a>
+<body class="text-center">
+    <div class="container">
+        <div>
+            {% if 'email' in session %}
+        <h2>Welcome {{session['first_name']}}!</h2>
 
-        <a href="/favorite_places">Favorites</a>
-    </div>
-        {% else %}
-    <h1> Welcome! </h1> 
+            {% else %}
+        <h2> Welcome! </h2> 
 
-    <div>
-        <p> Don't have an account yet? <a href="/">Create account</a></p>
-    </div>
-        {% endif %}
-    <form action='/results' method="POST">
+        <div>
+            <p> Don't have an account yet? <a href="/">Create account</a></p>
+        </div>
+            {% endif %}
 
-        <label for="lang-select">Choose a type:</label>
+        <div id ='results-form'>
+            <form action='/results' method="POST">
+                <div class="col-md-12" >
+                    <label for="lang-select">Choose a type:</label>
 
-        <select name="type" id="place-type">
-          <option value="Coffee">Coffee & Tea</option>
-          <option value="restaurants">Restaurants</option>
-          <option value="bakery">Bakery</option>
-          <option value="bars">Bars</option>
-          <option value="desserts">Desserts</option>
-          <option value="floral">Floral</option>
-        </select>
+                    <select class="form-select" name="type" id="place-type">
+                    <option value="Coffee">Coffee & Tea</option>
+                    <option value="restaurants">Restaurants</option>
+                    <option value="bakery">Bakery</option>
+                    <option value="bars">Bars</option>
+                    <option value="desserts">Desserts</option>
+                    <option value="floral">Floral</option>
+                    </select>
+            </div>
+            <div class=" col-md-12">
+                <label for="city"> What city:</label>
+                <input class="form-control" type="text" name="location" id ="location" placeholder = "City, State" required>
+            </div>
+                <button type="submit" class="btn btn-secondary"> Search </button>
 
-        <label for="city"> What city:</label>
-        <input type="text" name="location" id ="location" required>
+            </form>
+        </div>
 
-        <button type="submit"> Search </button>
+        </div>
 
-
-
-
-
-    </form>
     </div>
 </body>
 {% endblock %}

@@ -55,7 +55,10 @@ def get_fav_by_user(user):
 
     return fav
 
+def get_by_place_user(user, place):
+    fav_id = db.session.query(User_fav_places).filter(User_fav_places.user_id == user,User_fav_places.favorite_place_id == place).first()
 
+    return fav_id
 
 
 def create_rating(user, score, favorite_place_id, user_id, comment):
