@@ -56,9 +56,9 @@ transform: scale(1.2);
 transition: 1s ease;  
 }
 .address{
-    margin-top: 30px;
+    /* margin-top: 30px; */
     background-color: rgb(157, 200, 200);
-    max-width: 100%;
+    /* max-width: 100%; */
 }
 
 .results{
@@ -67,7 +67,7 @@ background-color: aliceblue;
 }
 
 .btn{
-    margin: 30px;
+    margin: 10px;
 }
 
 footer{
@@ -89,5 +89,28 @@ footer{
 table {
     border: 2px solid rgb(24, 72, 56);
     letter-spacing: 2px;
+}
+th, td{
+    padding: 10px;
+}
 
+.hour-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+
+}
+.location-hours{
+    background-color: rgb(157, 200, 200);
+}
+.title-hours{
+    padding: 60px;
+    /* display: flex; */
+}
+
+.map,
+#map{
+    width: 1000px;
+    height: 800px;
 }

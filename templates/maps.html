@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<body class="text-center">
+    <div class="container">
+
+<section class = 'map'>
+    <div id='map'></div>
+</section>
+
+
+
+
+<script>
+    const lon = {{lon}}
+    const lat = {{lat}}
+</script>
+
+
+
+<script src="/static/js/maps.js"></script>
+<script
+  async
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3IF29yT9xLhavg3w6jOW8mP33CChEi1Q&callback=initMap">
+</script>
+</div>
+</body>
+
+
+
+{% endblock %}

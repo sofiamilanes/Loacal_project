@@ -16,7 +16,7 @@ def get_results(term, location):
     'term': f"locally {term}",
     'location': location,
     'limit': 20,
-    'radius': 35000
+    # 'radius': 35000
     }
 
     res =  requests.get(url, headers=HEADER, params=url_params)
@@ -34,3 +34,5 @@ def search_by_id(id):
 
 # for place in res['businesses']:
 #     print(place['name'])
+
+# AIzaSyA3IF29yT9xLhavg3w6jOW8mP33CChEi1Q

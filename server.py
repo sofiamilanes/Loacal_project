@@ -1,6 +1,6 @@
 
 
-from flask import Flask, render_template, redirect, request, session, flash
+from flask import Flask, jsonify, render_template, redirect, request, session, flash
 from yelp_search import get_results, search_by_id
 from model import connect_to_db
 import crud
@@ -11,6 +11,8 @@ app = Flask(__name__)
 app.secret_key = "SECTRET KEY"
 app.jinja_env.undefined = StrictUndefined
 
+
+
 @app.route('/')
 def index():
     """returns registarion form"""
@@ -19,16 +21,22 @@ def index():
 
     return render_template('register.html')
 
+
+
 @app.route('/login')
 def login():
     """shows log in from """
     return render_template('login.html')
+
+
 
 @app.route('/logout')
 def logout():
     del session['email']
 
     return redirect('/')
+
+
 
 @app.route('/authentication', methods = ['POST'])
 def authentication():
@@ -48,10 +56,13 @@ def authentication():
     return redirect('/login')
 
 
+
 @app.route('/homepage')
 def homepage():
 
- return render_template('homepage.html')
+    return render_template('homepage.html')
+
+
 
 
 @app.route('/registration', methods = ["POST"])
@@ -64,7 +75,6 @@ def registration():
 
 
     if request.form['conf-password'] != password:
-        # print('cant')
         flash("passwords did not match please try again")
         return redirect('/')
 
@@ -88,21 +98,10 @@ def registration():
 @app.route('/results', methods = ["POST"])
 
 def results():
-    # list_of_places = []
-    # term = request.form['type']
-    # location = request.form['location']
 
-    # results = get_results(term, location)
-    # for place in results['businesses']:
-    #     list_of_places.append(place)
-    #     session['list'] = list_of_places
-    # print(session['list'][0])
-    # return render_template('results.html', results = list_of_places)
-
-    del session['list']
+    # del session['list']
 
     session['list'] = {}
-    # print(session['list'])
 
     term = request.form['type']
     location = request.form['location']
@@ -118,13 +117,10 @@ def results():
             session['list'][place['id']]['id'] =[place][0]["id"]
             session['list'][place['id']]['city'] =[place][0]["location"]['city']
             session['list'][place['id']]['state'] =[place][0]["location"]['state']
+            # session['list'][place['id']]['coordinates'] = [place][0]["coordinates"]#! DONT THINK I NEED THIS!
 
 
     return redirect('/results')
-
-    # return render_template('results.html', results = session['list'])
-
-
 
 
 
@@ -137,15 +133,19 @@ def results2():
     return render_template('results.html', results = results)
 
 
+
 @app.route('/results/<id>')
 def results_info(id):
-
+    #* MAKE SURE SESSION KEEPS UPDATING)
     results = search_by_id(id)
+
+
     #* This is sending the days to the html for me to use (days)
     Days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    print(results)
+    # print(results)
 
     return render_template('results_details.html', results = results, days = Days)
+
 
 
 @app.route('/<id>/add_fav')
@@ -189,16 +189,27 @@ def add_fav(id):
 
     return redirect('/favorite_places')
 
+
 @app.route('/favorite_places')
 def fav_list():
     logged_in_email = session.get('email')#! need to remove the add to favorite if not logged in 
     user = crud.get_user_by_email(logged_in_email)
     favs = crud.get_fav_by_user(user.user_id)
-    # print(f' THIS IS THE USER{user.user_id}')
-    # for fav in favs:
-    #     print(fav)
 
     return render_template('favorites.html', favorites = favs)
+
+# @app.route("/map-info.json")
+# def map_info():
+ 
+#     return jsonify()
+
+@app.route('/maps', methods=['GET'])
+def maps():
+
+    lon = request.args.get('longitude')
+    lat = request.args.get('latitude')
+
+    return render_template('maps.html', lon = lon, lat = lat)
 
 
 if __name__ == '__main__':

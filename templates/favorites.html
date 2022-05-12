@@ -9,10 +9,16 @@
         {% for fav in favorites%}
             <div class="results">
                 <h4>{{fav[0]}}</h4>
-                <a href='results/{{fav[1]}}'> View details</a>
+                <a  href='results/{{fav[1]}}' class="btn btn-outline-success">View details</a> <br>
+
+                <a href='#'class="btn btn-outline-danger btn-sm">remove</a>
             </div>
         {% endfor%}
-    </div>
+        
+            <div>
+            <a href="/results" class="btn btn-secondary">Back to results</a>
+            </div>
+        </div>
 </body>
-</html>
+
 {% endblock %}

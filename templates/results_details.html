@@ -19,11 +19,33 @@
             {{results.categories[0].title}}
 
         </div>
-        <div class="image-info">
             <div class = img>
                 <img src="{{results.image_url}}" alt="{{results.name}} img">
             </div>
 
+ 
+<div class="location-hours">
+    <div class="title-hours">
+    <h5>Location & Hours</h5> 
+    </div>
+    <div class="hour-info">
+        <div class = "address">
+            <h6>Address: </h6>
+            <address> 
+                {% for item in results.location.display_address%}
+                {{item}}
+                <br>
+                {% endfor%}
+                {% if (results.location.address1 != None and results.location.address1 != '') %}
+                <form id = "location-form" action="/maps", method="GET">
+                    <input type="hidden" id="latitude" name="latitude" value="{{results.coordinates['latitude']}}">
+                    <input type="hidden" id="longitude" name="longitude" value="{{results.coordinates['longitude']}}">
+                    <button type="submit" class ="btn btn-outline-success btn-sm"> Get directions</button>
+                  </form>
+                {% endif %}
+            </address>
+
+</div>
             {% if 'hours' in results%}
             <div class="time">
                 <table>
@@ -47,35 +69,25 @@
                     </tr>
                 </table>
             </div>
+            {% else %}
+            <h6> Hours currently not available </h6>
 
                 {% endif %}
-
- 
-        </div>
-
-        <div class = "address">
-            <h6>Address: </h6>
-            <address> 
-                <p>{{results.location.address1}},</p>        
-                <p>{{results.location.city}}, {{results.location.state}} </p>
-                <p>{{results.location.zip_code}}</p>
-            </address>
-
-
-
-        <div class = 'contact'>
-            {% if results.display_phone != ''%}
-            <h6>Phone number:</h6>
-            <p>{{results.display_phone}}</p>
-            {% endif %}
-        </div>
-
-
-        </div>
-
-        <a href="/results" class="btn btn-secondary"> look up different location</a>
+                <div class = 'contact'>
+                    <h6>Phone number:</h6>
+                    {% if results.display_phone != ''%}
+                    <p>{{results.display_phone}}</p>
+                    <a href="tel:{{results.phone}}"  class="btn btn-outline-success btn-sm"> Call Now</a>
+                    {% else %}
+                    <h6> currently not available </h6>
+                    {% endif %}
+                </div>
 
     </div>
+</div>
+        <a href="/results" class="btn btn-secondary"> look up different location</a>
+
+
 
 </body>
 
