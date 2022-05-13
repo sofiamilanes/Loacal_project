@@ -24,12 +24,12 @@
             </div>
 
  
-<div class="location-hours">
+<div class=" location-hours">
     <div class="title-hours">
     <h5>Location & Hours</h5> 
     </div>
-    <div class="hour-info">
-        <div class = "address">
+    <div class="row hour-info">
+        <div class = "col-4 address">
             <h5>Address: </h5>
             <address> 
                 {% for item in results.location.display_address%}
@@ -48,8 +48,11 @@
             </address>
 
 </div>
-            {% if 'hours' in results%}
-            <div class="time">
+            
+            <div class=" col-4 time">
+            
+                {% if 'hours' in results%}
+                
                 <table>
                     <tr>
                         <th>Day</th>
@@ -75,7 +78,7 @@
             <h6> Hours currently not available </h6>
 
                 {% endif %}
-                <div class = 'contact'>
+                <div class = 'col-4 contact'>
                     <h5>  Phone number :  </h5>
                     {% if results.display_phone != ''%}
                     <p>  {{results.display_phone}}  </p>

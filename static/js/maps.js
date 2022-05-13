@@ -17,29 +17,39 @@ function initMap(){
 
       const PlaceMarker = new google.maps.Marker({
         position: Place,
-        title: 'Coffee',
         map: basicMap,
         icon: {
             url: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png"
           }
       });
 
-      // current location 
-    document.querySelector('#current-location').addEventListener('click', () =>{
-        const current = navigator.geolocation.getCurrentPosition((position)=>{
-            window.userLocation = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            console.log(userLocation)
 
-            basicMap.setCenter(userLocation);
-            basicMap.setZoom(13);
-        })
+    const current = navigator.geolocation.getCurrentPosition((position)=>{
+        window.userLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+        console.log(userLocation)
+
+        // basicMap.setCenter(userLocation);
+        // basicMap.setZoom(13);
+    })
+
+      // current location 
+
 
         document.querySelector('#get-directions').addEventListener('click',() =>{
 
-
+            // const current = navigator.geolocation.getCurrentPosition((position)=>{
+            //     window.userLocation = {
+            //         lat: position.coords.latitude,
+            //         lng: position.coords.longitude
+            //     };
+            //     console.log(userLocation)
+        
+            //     basicMap.setCenter(userLocation);
+            //     basicMap.setZoom(13);
+            // })
 
             const directionsService = new google.maps.DirectionsService();
 
@@ -56,15 +66,15 @@ function initMap(){
 
                 destination: Place,
 
-                travelMode:'WALKING'
+                travelMode:'DRIVING'
             };
             directionsService.route(Route,(response, status)=>{
                 if(status === 'OK'){
                     directionsRenderer.setDirections(response)
                 }else{
-                    alert(`DIRECTIONS ${status}`)
+                    alert(`Directions request unsuccessful due to ${status}`)
                 }
             });
           });
-      });
+    //   });
 }
