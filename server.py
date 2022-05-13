@@ -225,6 +225,8 @@ def maps():
     lat = request.args.get('latitude')
 
 
+
+
     return render_template('maps.html', lon = lon, lat = lat)
 
 
