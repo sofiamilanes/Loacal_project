@@ -209,7 +209,7 @@ def unlike(id):
 
 @app.route('/favorite_places')
 def fav_list():
-    logged_in_email = session.get('email')#! need to remove the add to favorite if not logged in 
+    logged_in_email = session.get('email')
     user = crud.get_user_by_email(logged_in_email)
     favs = crud.get_fav_by_user(user.user_id)
     # print(favs.likes)

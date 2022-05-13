@@ -12,7 +12,7 @@
         </div>
         {% if 'email' in  session %}
         
-        <a href="/{{results.id}}/add_fav" class="btn btn-outline-success btn-sm">Add to favorite</a>
+        <a href="/{{results.id}}/add_fav" class="btn btn-outline-success btn-sm">Add to favorites</a>
         {% endif %}
         <div class = "categories">
 
@@ -61,9 +61,9 @@
 
                     <tr>
                         <th>{{days[item['day']]}}</th>
-                        <td>{{item['start']}}</td>
+                        <td>{{item['start'][:2]}}:{{item['start'][2:]}}</td>
                         <td>-</td>
-                        <td>{{item['end']}}</td>
+                        <td>{{item['end'][:2]}}:{{item['end'][2:]}}</td>
 
 
                     {% endfor%}

@@ -1,5 +1,7 @@
 .container{
     padding: 50px;
+    /* border: 1px solid black;
+    min-height: 1000px; */
 
 }
 
@@ -26,9 +28,12 @@ h5, h4, h3{
     text-shadow: 1px 1px 1px rgb(200, 148, 195);
     background-color: aliceblue;
     width: 100%;
-    padding: 30px;
+    padding: 45px;
     margin: 0 auto;
-    max-width: 330px;
+    margin-bottom: 25px;
+    max-width: 350px;
+    border: 1px solid black;
+
 }
 
 body{
@@ -124,6 +129,9 @@ a.btn-outline-info:hover {
     /* background-color: black; */
     background-color: black;
 
+}
+.btn-primary{
+    margin-top: 25px;
 }
 
 
