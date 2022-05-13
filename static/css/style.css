@@ -3,40 +3,34 @@
 
 }
 
-h2{
-    color: rgb(60, 88, 88);
-    padding: 50px;
+h1{
+    padding: 35px;
+    text-shadow: 3px 3px 3px rgb(149, 203, 203);
+
 }
-h3{
+
+h2{
+    text-shadow: 2px 2px 4px rgb(200, 148, 195);
     padding: 30px;
     background-color: rgb(157, 200, 200);
+}
+h5, h4, h3{
+    text-shadow: 1px 1px 2px rgb(200, 148, 195);
 }
 
 .alert-warning {
     color: rgb(139, 3, 3);
 }
 
-#account-form{
+#account-form, #login-form, #results-form{
+    text-shadow: 1px 1px 1px rgb(200, 148, 195);
     background-color: aliceblue;
     width: 100%;
     padding: 30px;
     margin: 0 auto;
     max-width: 330px;
 }
-#login-form{
-    width: 100%;
-    padding: 15px;
-    margin: 0 auto;
-    max-width: 300px;
-}
 
-#results-form{
-    padding-top: 100;
-    width: 100%;
-    padding: 15px;
-    margin: 0 auto;
-    max-width: 300px;
-}
 body{
     color: blue;
 }
@@ -45,6 +39,7 @@ img{
     margin: 30px;
     width: 330px;
     height: 400px;
+
 }
 
 /* This is the hover one */
@@ -67,7 +62,7 @@ background-color: aliceblue;
 }
 
 .btn{
-    margin: 10px;
+    margin: 7px;
 }
 
 footer{
@@ -97,7 +92,7 @@ th, td{
 .hour-info{
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     padding: 20px;
 
 }
@@ -105,12 +100,35 @@ th, td{
     background-color: rgb(157, 200, 200);
 }
 .title-hours{
-    padding: 60px;
+    padding: 45px;
+    padding-top: 60px;
     /* display: flex; */
 }
 
 .map,
 #map{
-    width: 1000px;
+    /* width: 1000px; */
     height: 800px;
+}
+a.btn-outline-info{
+    text-shadow: 1px 1px 1px rgb(157, 200, 200);
+    /* background-color: black; */
+    color: rgb(16, 15, 16);
+}
+a.btn-outline-info:hover {
+    background-color: rgb(157, 200, 200);
+  }
+
+.btn-outline-danger{
+    text-shadow: 1px 1px rgb(1, 0, 0);
+    /* background-color: black; */
+    background-color: black;
+
+}
+
+
+/* a.btn-outline-success, .btn-outline-success{
+    text-shadow: 1px 1px rgba(62, 161, 95, 0.829);
+    /* background-color: black; */
+
 }

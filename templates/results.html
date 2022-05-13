@@ -4,7 +4,7 @@
 
 <body class="text-center">
     <div class="container">
-
+        <h1>Results</h1>
     {% for result in results %}
         <div class = "row">
             <div class="results">
@@ -15,7 +15,7 @@
             </div>
 
             <div class="col-12">
-                <a href="/results/{{results[result].id}}">View more details</a>
+                <a href="/results/{{results[result].id}}" class="btn btn-outline-info btn-sm">View more details</a>
                 </div>
             </div>
         </div>

@@ -11,13 +11,16 @@ function initMap(){
 
     const basicMap = new google.maps.Map(document.querySelector('#map'), {
         center: Nirvana,
-        zoom: 13,
+        zoom: 14,
       });
 
-      const CoffeeMarker = new google.maps.Marker({
+      const PlaceMarker = new google.maps.Marker({
         position: Nirvana,
         title: 'Coffee',
         map: basicMap,
+        icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png"
+          }
       });
 
 }

@@ -5,20 +5,27 @@
 {% block body %}
 <body class="text-center">
     <div class="container">
-        <h2>Welcome to your favorites!</h2>
+        <h1>Welcome to your favorites!</h1>
         {% for fav in favorites%}
-            <div class="results">
-                <h4>{{fav[0]}}</h4>
-                <a  href='results/{{fav[1]}}' class="btn btn-outline-success">View details</a> <br>
+            {% if fav.likes == True%}
 
-                <a href='#'class="btn btn-outline-danger btn-sm">remove</a>
-            </div>
+                <div class="results" id="{{fav.place_ylp_id}}">
+                    <h3>{{fav.name}}</h3>
+                    <p>Location: {{fav.city}}</p>
+
+                    <a  href='results/{{fav.place_ylp_id}}' class="btn btn-outline-info btn-sm">View details</a> <br>
+
+                    <button value='{{fav.place_ylp_id}}' class="remove btn btn-outline-danger btn-sm">remove</button>
+                </div>
+            {% endif %}
         {% endfor%}
-        
+
             <div>
             <a href="/results" class="btn btn-secondary">Back to results</a>
             </div>
         </div>
+
+        <script src="static/js/favorites.js"></script>
 </body>
 
 {% endblock %}

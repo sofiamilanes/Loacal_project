@@ -8,7 +8,7 @@
     <div class="container">
 
         <div class = 'title'>
-                <h3>{{results.name}}</h3>
+                <h2>{{results.name}}</h2>
         </div>
         {% if 'email' in  session %}
         
@@ -30,7 +30,7 @@
     </div>
     <div class="hour-info">
         <div class = "address">
-            <h6>Address: </h6>
+            <h5>Address: </h5>
             <address> 
                 {% for item in results.location.display_address%}
                 {{item}}
@@ -40,6 +40,7 @@
                 <form id = "location-form" action="/maps", method="GET">
                     <input type="hidden" id="latitude" name="latitude" value="{{results.coordinates['latitude']}}">
                     <input type="hidden" id="longitude" name="longitude" value="{{results.coordinates['longitude']}}">
+
                     <button type="submit" class ="btn btn-outline-success btn-sm"> Get directions</button>
                   </form>
                 {% endif %}
@@ -74,9 +75,9 @@
 
                 {% endif %}
                 <div class = 'contact'>
-                    <h6>Phone number:</h6>
+                    <h5>  Phone number :  </h5>
                     {% if results.display_phone != ''%}
-                    <p>{{results.display_phone}}</p>
+                    <p>  {{results.display_phone}}  </p>
                     <a href="tel:{{results.phone}}"  class="btn btn-outline-success btn-sm"> Call Now</a>
                     {% else %}
                     <h6> currently not available </h6>

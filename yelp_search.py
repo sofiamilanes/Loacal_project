@@ -15,7 +15,7 @@ def get_results(term, location):
     url_params = {
     'term': f"locally {term}",
     'location': location,
-    'limit': 20,
+    'limit': 15,
     # 'radius': 35000
     }
 

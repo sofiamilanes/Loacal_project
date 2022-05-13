@@ -177,17 +177,34 @@ def add_fav(id):
         # print(place)
         # print(place.place_id)
 
-        crud.create_fav_place(place.place_id, user.user_id)
+        fav_place = crud.create_fav_place(place.place_id, user.user_id)
+        # print("THIS IS MY LIKES ",fav_place.likes)
 #!
     else:
         in_fav = crud.get_by_place_user(user.user_id, check_db_place.place_id)
         if in_fav != None:
-            flash("Already added to favorites")
-            return redirect ('/favorite_places')
+            if in_fav.likes == True:
+                flash("Already added to favorites")
+                return redirect ('/favorite_places')
+            else:
+                crud.change_to_like(user.user_id, check_db_place.place_id)
+                return redirect ('/favorite_places')
         else:
             crud.create_fav_place(check_db_place.place_id, user.user_id)
 
     return redirect('/favorite_places')
+
+
+@app.route('/<id>/unlike')
+def unlike(id):
+    check_db_place = crud.search_by_ylpid(id)
+    logged_in_email = session.get('email')
+    user = crud.get_user_by_email(logged_in_email)
+
+    in_fav = crud.change_to_dislike(user.user_id, check_db_place.place_id)
+    # print("EITHER TRUE OR FALSE", in_fav.likes)
+    return "Success"
+    # return redirect('/favorite_places')
 
 
 @app.route('/favorite_places')
@@ -195,19 +212,18 @@ def fav_list():
     logged_in_email = session.get('email')#! need to remove the add to favorite if not logged in 
     user = crud.get_user_by_email(logged_in_email)
     favs = crud.get_fav_by_user(user.user_id)
+    # print(favs.likes)
 
     return render_template('favorites.html', favorites = favs)
 
-# @app.route("/map-info.json")
-# def map_info():
- 
-#     return jsonify()
+
 
 @app.route('/maps', methods=['GET'])
 def maps():
 
     lon = request.args.get('longitude')
     lat = request.args.get('latitude')
+
 
     return render_template('maps.html', lon = lon, lat = lat)
 
