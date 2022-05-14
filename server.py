@@ -48,7 +48,7 @@ def authentication():
 
     if user:
         if password == user.password:
-            session["first_name"] = user.fname
+            session["first_name"] = user.fname.title()
             session['email'] = user.email  #*this will be used later for log out button 
             return redirect('/homepage')
 
@@ -108,7 +108,7 @@ def results():
 
     results = get_results(term, location)
     if 'businesses' not in results:
-        flash("Invalid City Please Try Again")
+        flash("Invalid City, Please Try Again")
         return redirect('/homepage')
     else:
         for place in results['businesses']:
@@ -138,13 +138,15 @@ def results2():
 def results_info(id):
     #* MAKE SURE SESSION KEEPS UPDATING)
     results = search_by_id(id)
-
-
+    Hours = {}
+    for item in results['hours'][0]['open']:
+        Hours['start']= datetime.datetime.strptime(item['start'],'%H%M').strftime('%I:%M %p')
+        Hours['end'] = datetime.datetime.strptime(item['end'],'%H%M').strftime('%I:%M %p')
     #* This is sending the days to the html for me to use (days)
     Days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    # print(results)
 
-    return render_template('results_details.html', results = results, days = Days)
+
+    return render_template('results_details.html', results = results, days = Days, Hours = Hours)
 
 
 

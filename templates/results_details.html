@@ -12,7 +12,7 @@
         </div>
         {% if 'email' in  session %}
         
-        <a href="/{{results.id}}/add_fav" class="btn btn-outline-success btn-sm">Add to favorites</a>
+        <a href="/{{results.id}}/add_fav" class="btn btn-outline-success btn-sm">Add to Favorites</a>
         {% endif %}
         <div class = "categories">
 
@@ -22,6 +22,14 @@
             <div class = img>
                 <img src="{{results.image_url}}" alt="{{results.name}} img">
             </div>
+
+<!-- THIS START DONT WORK  -->
+            <!-- <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span> -->
+            
 
  
 <div class=" location-hours">
@@ -42,7 +50,7 @@
                     <input type="hidden" id="longitude" name="longitude" value="{{results.coordinates['longitude']}}">
 
 
-                    <button type="submit" class ="btn btn-outline-success btn-sm"> Get directions</button>
+                    <button type="submit" class ="btn btn-outline-success btn-sm"> Get Directions</button>
                   </form>
                 {% endif %}
             </address>
@@ -64,10 +72,10 @@
                     {% for item in results['hours'][0]['open'] %}
 
                     <tr>
-                        <th>{{days[item['day']]}}</th>
-                        <td>{{item['start'][:2]}}:{{item['start'][2:]}}</td>
+                        <th>{{days[item['day']]}}:</th>
+                        <td>{{Hours['start']}}</td>
                         <td>-</td>
-                        <td>{{item['end'][:2]}}:{{item['end'][2:]}}</td>
+                        <td>{{Hours['end']}}</td>
 
 
                     {% endfor%}
@@ -75,7 +83,7 @@
                 </table>
             </div>
             {% else %}
-            <h6> Hours currently not available </h6>
+            <h6> Hours Currently Not Available </h6>
 
                 {% endif %}
                 <div class = 'col-4 contact'>
@@ -84,13 +92,13 @@
                     <p>  {{results.display_phone}}  </p>
                     <a href="tel:{{results.phone}}"  class="btn btn-outline-success btn-sm"> Call Now</a>
                     {% else %}
-                    <h6> currently not available </h6>
+                    <h6> Currently Not Available </h6>
                     {% endif %}
                 </div>
 
     </div>
 </div>
-        <a href="/results" class="btn btn-secondary"> look up different location</a>
+        <a href="/results" class="btn btn-secondary"> Look Up Different Location</a>
 
 
 

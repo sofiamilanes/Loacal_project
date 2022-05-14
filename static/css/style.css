@@ -14,7 +14,7 @@ h1{
 h2{
     text-shadow: 2px 2px 4px rgb(200, 148, 195);
     padding: 30px;
-    background-color: rgb(157, 200, 200);
+    background-color: rgba(157, 200, 200, 0.542);
 }
 h5, h4, h3{
     text-shadow: 1px 1px 2px rgb(200, 148, 195);
@@ -60,7 +60,7 @@ transition: 1s ease;
 }
 .address{
     /* margin-top: 30px; */
-    background-color: rgb(157, 200, 200);
+    /* background-color: rgb(157, 200, 200); */
     /* max-width: 100%; */
 }
 
@@ -78,8 +78,8 @@ footer{
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #a0e9e9;
-    color: white;
+    background-color: #a0e9e9d4;
+    /* color: white; */
     text-align: center;
 }
 /*  */
@@ -91,8 +91,11 @@ footer{
 
 table {
     border: 2px solid rgb(24, 72, 56);
-    letter-spacing: 2px;
+    /* letter-spacing: 1px; */
     margin: auto;
+    background-color: rgba(251, 252, 250, 0.393);
+    margin-bottom: 80px;
+  
 }
 th, td{
     padding: 10px;
@@ -106,7 +109,7 @@ th, td{
 
 }
 .location-hours{
-    background-color: rgb(157, 200, 200);
+    background-color: rgba(157, 200, 200, 0.542);
 }
 .title-hours{
     padding: 45px;
@@ -143,4 +146,7 @@ a.btn-outline-info:hover {
     text-shadow: 1px 1px rgba(62, 161, 95, 0.829);
     /* background-color: black; */
 
-}
+
+    .checked {
+        color: pink;
+      }
