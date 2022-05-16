@@ -11,7 +11,12 @@ function remove(evt){
     }
 }
 
-
 for ( const button of buttons){
     button.addEventListener('click', remove);
 }
+
+// const addReview = document.querySelector('.addReview');
+
+// function addReview(evt){
+//     evt.preventDefault()
+// }

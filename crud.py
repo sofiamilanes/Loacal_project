@@ -1,5 +1,6 @@
 from tkinter import Place
 from model import db, User, Places, Ratings, User_fav_places, Type_of_place, connect_to_db
+from sqlalchemy.sql import func
 
 def create_user(fname, lname, email, password):
     user = User(fname = fname, lname = lname, email = email, password = password)
@@ -34,10 +35,44 @@ def create_fav_place(favorite_place_id, user_id):
     db.session.commit()
     return fav_place
 
+#! unable to create rating unless place is in DB, which is only added if anyone adds to favorites
 
-def create_rating(score, favorite_place_id,user_id, comment):
-    rating = Ratings(score = score, favorite_place_id= favorite_place_id, user_id=user_id, comment = comment)
+def create_ratings(score, place_id, user_id, comment ):
+    rating = Ratings(score = score, favorite_place_id = place_id, user_id =user_id, comment = comment)
+    print('successfully added place')
+    db.session.add(rating)
+    db.session.commit()
+
     return rating
+
+def avarage(place_id):
+    ratings = db.session.query(func.avg(Ratings.score)).filter(Ratings.favorite_place_id == place_id).all()
+    return ratings[0][0]
+
+
+def view_ratings(place_id):
+
+    ratings = db.session.query(Ratings).filter(Ratings.favorite_place_id == place_id).all()
+    return ratings
+
+
+def get_all_ratings(place_id):
+    all_ratings = db.session.query(User.fname, User.lname, Ratings.score, Places.name, Ratings.comment).join(Places).filter(Ratings.favorite_place_id == place_id).join(User).filter(Ratings.user_id == User.user_id).all()
+    return all_ratings
+
+
+def get_rating(user, place):
+    rating = db.session.query(Ratings).filter(Ratings.user_id == user,Ratings.favorite_place_id == place).first()
+    return rating
+
+
+
+def get_placeId_byyelp(ylp_id):
+    id = db.session.query(Places.place_id).filter(Places.place_ylp_id == ylp_id).first()
+    if id != None:
+        return id[0]
+    else:
+        return id
 
 def get_fav_by_user(user):
     fav = db.session.query(Places.name, Places.place_ylp_id, Places.city, User_fav_places.likes).join(User_fav_places).filter(User_fav_places.favorite_place_id == Places.place_id).join(User).filter(user == User_fav_places.user_id).all()
@@ -61,11 +96,11 @@ def change_to_like(user, place):
     db.session.commit()
     return fav_id
 
-def create_rating(user, score, favorite_place_id, user_id, comment):
+# def create_rating(user, score, favorite_place_id, user_id, comment):
 
-    rating = Ratings(user=user, favorite_place_id = favorite_place_id,user_id = user_id, score=score, comment = comment)
-    print('successfully added fav place')
-    return rating
+#     rating = Ratings(user=user, favorite_place_id = favorite_place_id,user_id = user_id, score=score, comment = comment)
+#     print('successfully added fav place')
+#     return rating
 
 
 

@@ -22,7 +22,22 @@
             <div class = img>
                 <img src="{{results.image_url}}" alt="{{results.name}} img">
             </div>
+            <div id = 'rate'>
+                <p>{{avarage}}</p>
 
+            </div>
+
+            <div id = 'ratings'>
+
+                {% if rated == None %}
+                <a href="/{{results.id}}/addRatings" id = 'addReview' class="btn btn-outline-success btn-sm">Add Review</a>
+
+                {% else %}
+                <a href="#" id = 'addReview' class="btn btn-outline-success btn-sm">Edit Review</a>
+                {% endif %}
+                <a href="/{{results.id}}/viewRatings" class="btn btn-outline-success btn-sm">View Reviews</a>
+
+            </div>
 <!-- THIS START DONT WORK  -->
             <!-- <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>

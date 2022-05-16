@@ -24,7 +24,7 @@ h5, h4, h3{
     color: rgb(139, 3, 3);
 }
 
-#account-form, #login-form, #results-form{
+#account-form, #login-form, #results-form, #rating-form{
     text-shadow: 1px 1px 1px rgb(200, 148, 195);
     background-color: aliceblue;
     width: 100%;
@@ -101,6 +101,13 @@ th, td{
     padding: 10px;
 }
 
+#ratings_table{
+    width: 1000px;
+}
+.ratings_row{
+    border: 2px solid rgb(24, 72, 56);
+    
+}
 .hour-info{
     /* display: flex; */
     align-items: center;

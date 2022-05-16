@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+
+{% block body %}
+<body class="text-center">
+    <div class="container">
+    <h3>Reviews for {{ratings[0].name}} </h3>
+
+
+<table id = 'ratings_table'>
+
+    <tr class = 'ratings_row'>
+        <th>Name</th>
+        <th>score</th>
+        <th>comment</th>
+    </tr>
+
+{% for rating in ratings%}
+<tr class = 'ratings_row'>
+<td>{{rating.fname}} {{rating.lname[0]}}.</td>
+<td>{{rating.score}}/5</td>
+<td>{{rating.comment}}</td>
+</tr>
+
+{%endfor%}
+</table>
+</div>
+</body>
+
+{% endblock %}

@@ -1,5 +1,6 @@
 
 
+from crypt import methods
 from flask import Flask, jsonify, render_template, redirect, request, session, flash
 from yelp_search import get_results, search_by_id
 from model import connect_to_db
@@ -138,6 +139,20 @@ def results2():
 def results_info(id):
     #* MAKE SURE SESSION KEEPS UPDATING)
     results = search_by_id(id)
+    user = crud.get_user_by_email(session.get('email'))
+    place_id = crud.get_placeId_byyelp(id)
+
+    rated = crud.get_rating(user.user_id, place_id)
+    print("SHOULD BE TURE OF FALSE",rated)
+    if place_id != None:
+        avarage = crud.avarage(place_id)
+        # print("THIS IS THE AVARAGE", avarage)
+        if avarage != None:
+            avarage =  '{0:.2g}'.format(avarage)
+        else:
+            avarage = "No reviews yet"
+    else:
+        avarage = "No reviews yet"
     Hours = {}
     for item in results['hours'][0]['open']:
         Hours['start']= datetime.datetime.strptime(item['start'],'%H%M').strftime('%I:%M %p')
@@ -146,7 +161,62 @@ def results_info(id):
     Days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
 
-    return render_template('results_details.html', results = results, days = Days, Hours = Hours)
+    return render_template('results_details.html', results = results, days = Days, Hours = Hours, avarage=avarage, rated = rated)
+
+
+#! unable to create rating unless place is in DB, which is only added if anyone adds to favorites
+@app.route('/<id>/addRatings')
+def add_ratings(id):
+    id = id
+    return render_template('fornow.html', id = id)
+
+@app.route('/<id>/rating', methods = ['POST'])
+def rating(id):
+    score = request.form['rating']
+    comment = request.form['comment']
+    results = search_by_id(id)
+    check_db_place = crud.search_by_ylpid(id)
+    print(comment)
+
+    logged_in_email = session.get('email')
+    user = crud.get_user_by_email(logged_in_email)
+    print("THIS IS THE USER", user.user_id)
+
+    if check_db_place == None:
+
+        place_ylp_id = results['id']
+        name = results['name']
+        city = results['location']['city']
+        zip_code = results['location']['zip_code']
+        address = results['location']['address1']
+        place = crud.create_place(place_ylp_id = place_ylp_id, name=name, city=city, zip_code= zip_code, address=address)
+        rating = crud.create_ratings(score= score, place_id=place.place_id, user_id=user.user_id)
+
+    else:
+        rating = crud.create_ratings(score= score, place_id=check_db_place.place_id, user_id=user.user_id, comment=comment)
+    return redirect(f'/{id}/viewRatings')
+
+@app.route('/<id>/viewRatings')
+def view_ratings(id):
+    check_db_place = crud.search_by_ylpid(id)
+    print("THIS IS THE PLACE",check_db_place)
+    if check_db_place != None:
+        ratings = crud.get_all_ratings(check_db_place.place_id)
+        print(ratings)
+        if ratings == []:
+            flash("Currently Has No Reviews")
+            return redirect(f'/results/{id}')
+
+    else:
+        flash("Currently Has No Reviews")
+        return redirect(f'/results/{id}')
+
+
+    return render_template('ratings.html', ratings = ratings)
+
+
+
+
 
 
 
@@ -157,7 +227,7 @@ def add_fav(id):
 
     # print(results)
     check_db_place = crud.search_by_ylpid(id)
-    # print(check_db_place)
+    # print(check_db_place.place_id)
 
     logged_in_email = session.get('email')#! need to remove the add to favorite if not logged in 
     user = crud.get_user_by_email(logged_in_email)
@@ -178,6 +248,7 @@ def add_fav(id):
         place = crud.create_place(place_ylp_id = place_ylp_id, name=name, city=city, zip_code= zip_code, address=address)
         # print(place)
         # print(place.place_id)
+        # check_db_place = crud.search_by_ylpid(id)
 
         fav_place = crud.create_fav_place(place.place_id, user.user_id)
         # print("THIS IS MY LIKES ",fav_place.likes)
