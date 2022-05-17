@@ -12,7 +12,8 @@
         </div>
         {% if 'email' in  session %}
         
-        <a href="/{{results.id}}/add_fav" class="btn btn-outline-success btn-sm">Add to Favorites</a>
+                
+                <a href="/{{results.id}}/add_fav" class="btn btn-outline-success btn-sm">Add to Favorites <span class="fa fa-heart"></span> </a>
         {% endif %}
         <div class = "categories">
 
@@ -68,17 +69,17 @@
                     <input type="hidden" id="longitude" name="longitude" value="{{results.coordinates['longitude']}}">
 
 
-                    <button type="submit" class ="btn btn-outline-success btn-sm"> Get Directions</button>
+                    <button type="submit" class ="btn btn-outline-success btn-sm"> Get Directions <span class="fa fa-car "></span></button>
                   </form>
                 {% endif %}
             </address>
 
 </div>
             
-            <div class=" col-4 time">
+            
             
                 {% if 'hours' in results%}
-                
+                <div class=" col-4 time">
                 <table>
                     <tr>
                         <th>Day</th>
@@ -87,28 +88,29 @@
                         <th>Close</th>
                     </tr>
 
-                    {% for item in results['hours'][0]['open'] %}
-
+                    {% for item in Hours %}
                     <tr>
-                        <th>{{days[item['day']]}}:</th>
-                        <td>{{Hours['start']}}</td>
+                        <th>{{days[item]}}</th>
+                        <td>{{Hours[item]['start']}}</td>
                         <td>-</td>
-                        <td>{{Hours['end']}}</td>
+                        <td>{{Hours[item]['end']}}</td>
 
 
                     {% endfor%}
                     </tr>
                 </table>
+                
             </div>
             {% else %}
+            <div class=" col-4 time">
             <h6> Hours Currently Not Available </h6>
-
+                </div>
                 {% endif %}
                 <div class = 'col-4 contact'>
                     <h5>  Phone number :  </h5>
                     {% if results.display_phone != ''%}
                     <p>  {{results.display_phone}}  </p>
-                    <a href="tel:{{results.phone}}"  class="btn btn-outline-success btn-sm"> Call Now</a>
+                    <a href="tel:{{results.phone}}"  class="btn btn-outline-success btn-sm"> Call Now <span class="fa fa-phone "></span></a>
                     {% else %}
                     <h6> Currently Not Available </h6>
                     {% endif %}

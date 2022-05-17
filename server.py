@@ -141,7 +141,7 @@ def results_info(id):
     results = search_by_id(id)
     user = crud.get_user_by_email(session.get('email'))
     place_id = crud.get_placeId_byyelp(id)
-    print("THIS IS THE USER",user)
+    print(results)
 
     #? THIS IT TO CHECK IF THE PERSON ALREADY RATED THE PLACE
     if user != None:
@@ -162,12 +162,16 @@ def results_info(id):
     else:
         average = "No reviews yet"
     Hours = {}
+    if "hours" not in results:
+        return render_template('results_details.html', results = results,average=average, rated = rated, user = user)
     for item in results['hours'][0]['open']:
-        Hours['start']= datetime.datetime.strptime(item['start'],'%H%M').strftime('%I:%M %p')
-        Hours['end'] = datetime.datetime.strptime(item['end'],'%H%M').strftime('%I:%M %p')
+        # Hours[item['day']]= datetime.datetime.strptime(item['start'],'%H%M').strftime('%I:%M %p')
+        Hours[item['day']] = {'end': datetime.datetime.strptime(item['end'],'%H%M').strftime('%I:%M %p'),
+                            'start':datetime.datetime.strptime(item['start'],'%H%M').strftime('%I:%M %p') }
+    
     #* This is sending the days to the html for me to use (days)
     Days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-
+    print(Hours)
 
     return render_template('results_details.html', results = results, days = Days, Hours = Hours, average=average, rated = rated, user = user)
 
