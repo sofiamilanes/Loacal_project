@@ -8,24 +8,34 @@
     <h3>Reviews for {{ratings[0].name}} </h3>
 
 
-<table id = 'ratings_table'>
+    <table id = 'ratings_table'>
 
-    <tr class = 'ratings_row'>
-        <th>Name</th>
-        <th>score</th>
-        <th>comment</th>
-    </tr>
+        <tr class = 'ratings_row'>
+            <th>Name</th>
+            <th>score</th>
+            <th>comment</th>
+        </tr>
 
-{% for rating in ratings%}
-<tr class = 'ratings_row'>
-<td>{{rating.fname}} {{rating.lname[0]}}.</td>
-<td>{{rating.score}}/5</td>
-<td>{{rating.comment}}</td>
-</tr>
+        {% for rating in ratings%}
+        <tr class = 'ratings_row'>
+            <td>{{rating.fname}} {{rating.lname[0].upper()}}.</td>
+            <td>
+            {% for num in range(rating.score|int)%}
+            <span class="fa fa-star checked"></span>
+            {% endfor %}
 
-{%endfor%}
-</table>
-</div>
+            {% for i in range(5 - rating.score|int ) %}
+            <span class="fa fa-star"></span>
+            {% endfor %}
+            </td>
+            <td>{{rating.comment}}</td>
+        </tr>
+
+        {%endfor%}
+    </table>
+    <a href="/results/{{id}}" class="btn btn-outline-success"> go back</a>
+
+    </div>
 </body>
 
 {% endblock %}

@@ -23,7 +23,16 @@
                 <img src="{{results.image_url}}" alt="{{results.name}} img">
             </div>
             <div id = 'rate'>
-                <p>{{avarage}}</p>
+
+                {% for num in range(average[0]|int)%}
+                <span class="fa fa-star checked"></span>
+                {% endfor %}
+                {% for num in range(5 - average[0]|int)%}
+                <span class="fa fa-star"></span>
+                {% endfor %}
+
+                <p>{{average}}</p>
+ 
 
             </div>
 

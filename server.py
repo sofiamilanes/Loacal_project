@@ -142,17 +142,21 @@ def results_info(id):
     user = crud.get_user_by_email(session.get('email'))
     place_id = crud.get_placeId_byyelp(id)
 
+    #? THIS IT TO CHECK IF THE PERSON ALREADY RATED THE PLACE
     rated = crud.get_rating(user.user_id, place_id)
-    print("SHOULD BE TURE OF FALSE",rated)
+
     if place_id != None:
-        avarage = crud.avarage(place_id)
+        average = crud.avarage(place_id)
+
         # print("THIS IS THE AVARAGE", avarage)
-        if avarage != None:
-            avarage =  '{0:.2g}'.format(avarage)
+        if average != None:
+
+            average =  '{0:.2g}'.format(average)
+
         else:
-            avarage = "No reviews yet"
+            average = "No reviews yet"
     else:
-        avarage = "No reviews yet"
+        average = "No reviews yet"
     Hours = {}
     for item in results['hours'][0]['open']:
         Hours['start']= datetime.datetime.strptime(item['start'],'%H%M').strftime('%I:%M %p')
@@ -161,7 +165,7 @@ def results_info(id):
     Days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
 
-    return render_template('results_details.html', results = results, days = Days, Hours = Hours, avarage=avarage, rated = rated)
+    return render_template('results_details.html', results = results, days = Days, Hours = Hours, average=average, rated = rated)
 
 
 #! unable to create rating unless place is in DB, which is only added if anyone adds to favorites
@@ -190,7 +194,7 @@ def rating(id):
         zip_code = results['location']['zip_code']
         address = results['location']['address1']
         place = crud.create_place(place_ylp_id = place_ylp_id, name=name, city=city, zip_code= zip_code, address=address)
-        rating = crud.create_ratings(score= score, place_id=place.place_id, user_id=user.user_id)
+        rating = crud.create_ratings(score= score, place_id=place.place_id, user_id=user.user_id,comment=comment)
 
     else:
         rating = crud.create_ratings(score= score, place_id=check_db_place.place_id, user_id=user.user_id, comment=comment)
@@ -198,11 +202,13 @@ def rating(id):
 
 @app.route('/<id>/viewRatings')
 def view_ratings(id):
+    id = id
+    print("THIS IS THE ID",id)
     check_db_place = crud.search_by_ylpid(id)
-    print("THIS IS THE PLACE",check_db_place)
+    # print("THIS IS THE PLACE",check_db_place)
     if check_db_place != None:
         ratings = crud.get_all_ratings(check_db_place.place_id)
-        print(ratings)
+        # print(ratings)
         if ratings == []:
             flash("Currently Has No Reviews")
             return redirect(f'/results/{id}')
@@ -212,7 +218,7 @@ def view_ratings(id):
         return redirect(f'/results/{id}')
 
 
-    return render_template('ratings.html', ratings = ratings)
+    return render_template('ratings.html', ratings = ratings, id = id)
 
 
 
