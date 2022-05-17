@@ -154,7 +154,8 @@ a.btn-outline-info:hover {
     /* background-color: black; */
 
 
-    .checked {
-        color: rgb(227, 159, 169);
+.checked {
+    color: rgb(227, 159, 169);
 
-      }
+    }
+

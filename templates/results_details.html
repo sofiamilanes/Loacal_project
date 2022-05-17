@@ -37,25 +37,19 @@
             </div>
 
             <div id = 'ratings'>
+                {% if user != None%}
+                    {% if rated == None %}
+                    <a href="/{{results.id}}/addRatings" id = 'addReview' class="btn btn-outline-success btn-sm">Add Review</a>
 
-                {% if rated == None %}
-                <a href="/{{results.id}}/addRatings" id = 'addReview' class="btn btn-outline-success btn-sm">Add Review</a>
-
-                {% else %}
-                <a href="#" id = 'addReview' class="btn btn-outline-success btn-sm">Edit Review</a>
-                {% endif %}
+                    {% else %}
+                    <a href="/{{results.id}}/editrating" id = 'addReview' class="btn btn-outline-success btn-sm">Edit Review</a>
+                    {% endif %}
+                {% endif %} 
                 <a href="/{{results.id}}/viewRatings" class="btn btn-outline-success btn-sm">View Reviews</a>
 
             </div>
-<!-- THIS START DONT WORK  -->
-            <!-- <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span> -->
-            
 
- 
+
 <div class=" location-hours">
     <div class="title-hours">
     <h5>Location & Hours</h5> 

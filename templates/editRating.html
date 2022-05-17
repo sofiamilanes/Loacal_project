@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<body class="text-center">
+    <div class="container">
+        <div class="row">
+            <div id = 'rating-form'>
+
+
+                <form action="/{{id}}/editrating" method="post">
+                <div class="col-md-12">  
+                    <label for="rating"><h6>What would you rate this place?</h6></label>
+                    <select  name="rating" required>
+                        <option value="" disabled selected hidden>{{rated.score}}</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select> / 5
+
+                </div>
+
+                <div class="col-md-12">  
+                    <label for="comment">Comment:</label>
+                    <textarea class="form-control" name="comment" id="comment" rows="4" cols="50" placeholder="{{rated.comment}}"></textarea> </textarea>
+                    </div>
+                    <button type="submit">rate</button>
+                </form>
+                </div>
+        </div>
+
+    </div>
+
+
+
+
+</body>
+
+
+
+
+
+
+{% endblock %}

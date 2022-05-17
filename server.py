@@ -141,9 +141,13 @@ def results_info(id):
     results = search_by_id(id)
     user = crud.get_user_by_email(session.get('email'))
     place_id = crud.get_placeId_byyelp(id)
+    print("THIS IS THE USER",user)
 
     #? THIS IT TO CHECK IF THE PERSON ALREADY RATED THE PLACE
-    rated = crud.get_rating(user.user_id, place_id)
+    if user != None:
+        rated = crud.get_rating(user.user_id, place_id)
+    else:
+        rated = None
 
     if place_id != None:
         average = crud.avarage(place_id)
@@ -165,14 +169,39 @@ def results_info(id):
     Days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
 
-    return render_template('results_details.html', results = results, days = Days, Hours = Hours, average=average, rated = rated)
+    return render_template('results_details.html', results = results, days = Days, Hours = Hours, average=average, rated = rated, user = user)
 
 
 #! unable to create rating unless place is in DB, which is only added if anyone adds to favorites
 @app.route('/<id>/addRatings')
 def add_ratings(id):
     id = id
-    return render_template('fornow.html', id = id)
+    return render_template('rate.html', id = id)
+
+@app.route('/<id>/editrating')
+def editrating(id):
+    id = id
+    user = crud.get_user_by_email(session.get('email'))
+    place_id = crud.get_placeId_byyelp(id)
+    rated = crud.get_rating(user.user_id, place_id)
+
+
+    return render_template('editRating.html', rated = rated, id = id)
+
+
+@app.route('/<id>/editrating', methods = ['POST'])
+def UpdateRating(id):
+    check_db_place = crud.search_by_ylpid(id)
+    user = crud.get_user_by_email(session.get('email'))
+    score = request.form['rating']
+    comment = request.form['comment']
+
+    rating= crud.update_rating(user.user_id, check_db_place.place_id, score=score, comment=comment)
+    return redirect(f'/{id}/viewRatings')
+
+
+
+
 
 @app.route('/<id>/rating', methods = ['POST'])
 def rating(id):

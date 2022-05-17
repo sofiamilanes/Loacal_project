@@ -65,7 +65,12 @@ def get_rating(user, place):
     rating = db.session.query(Ratings).filter(Ratings.user_id == user,Ratings.favorite_place_id == place).first()
     return rating
 
-
+def update_rating(user, place, score, comment):
+    rating = db.session.query(Ratings).filter(Ratings.user_id == user,Ratings.favorite_place_id == place).first()
+    rating.score = score
+    rating.comment = comment
+    db.session.commit()
+    return rating
 
 def get_placeId_byyelp(ylp_id):
     id = db.session.query(Places.place_id).filter(Places.place_ylp_id == ylp_id).first()
