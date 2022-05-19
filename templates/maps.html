@@ -5,30 +5,41 @@
 <body class="text-center">
     <div class="container">
 
-<section class = 'map'>
-    <!-- <button id="current-location"> current-location</button> -->
-    <button class = 'btn btn-outline-info btn' id = "get-directions"> get directions</button>
-    <div id='map'></div>
-</section>
+    <div class = 'map'>
+        <section class = 'method' >
+            <label for="mode"> <h5>Mode of travel:</h5> </label>
+            <select id="mode">
+                <option value="DRIVING">Driving</option>
+                <option value="WALKING">Walking</option>
+                <option value="BICYCLING">Bicycling</option>
+                <option value="TRANSIT">Transit</option>
+            </select><br>
+            <button class = 'btn btn-outline-info btn-sm' id = 'directions'> Get Directions</button>
+        </section>
 
 
+        <div id = 'map_side'>
+            <div id='map'></div>
+            <div id="sidebar"></div>
+            <div id = 'dir'></div>
+        </div>
+
+    </div>
 
 
-<script>
-    const lon = {{lon}};
-    const lat = {{lat}};
+        <script>
+            const lon = {{lon}};
+            const lat = {{lat}};
 
-</script>
-
-
+        </script>
 
 
-<script src="/static/js/maps.js"></script>
-<script
-  async
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3IF29yT9xLhavg3w6jOW8mP33CChEi1Q&callback=initMap">
-</script>
-</div>
+        <script src="/static/js/maps.js"></script>
+        <script
+        async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3IF29yT9xLhavg3w6jOW8mP33CChEi1Q&callback=initMap">
+        </script>
+    </div>
 </body>
 
 
