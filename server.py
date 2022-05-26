@@ -1,6 +1,7 @@
 
 
 from crypt import methods
+from hashlib import new
 from flask import Flask, jsonify, render_template, redirect, request, session, flash
 from yelp_search import get_results, search_by_id
 from model import connect_to_db
@@ -57,12 +58,12 @@ def registration():
 
 
     if request.form['conf-password'] != password:
-        flash("passwords did not match please try again")
+        flash("Passwords Did Not Match, Please Try Again")
         return redirect('/')
 
     user = crud.get_user_by_email(email)
     if user:
-        flash("Email already exist, please try to log in")
+        flash("Email Already Exist, Please Try To Log In")
         return redirect('/')
 
     else:
@@ -207,7 +208,6 @@ def UpdateRating(id):
     user = crud.get_user_by_email(session.get('email'))
     score = request.form['rating']
     comment = request.form['comment']
-
     rating= crud.update_rating(user.user_id, check_db_place.place_id, score=score, comment=comment)
     return redirect(f'/{id}/viewRatings')
 
@@ -246,6 +246,7 @@ def view_ratings(id):
     print("THIS IS THE ID",id)
     check_db_place = crud.search_by_ylpid(id)
     # print("THIS IS THE PLACE",check_db_place)
+    
     if check_db_place != None:
         ratings = crud.get_all_ratings(check_db_place.place_id)
         # print(ratings)
@@ -260,7 +261,10 @@ def view_ratings(id):
 
     return render_template('ratings.html', ratings = ratings, id = id)
 
-
+# @app.route('/<id>/deleteRating')
+# def deleteRating(id):
+#     id = id
+#     deleterating = crud.Deletebyid(id)
 
 
 
@@ -349,6 +353,70 @@ def maps():
 
 
 
+##########################################
+
+
+@app.route('/aboutme')
+def about_me():
+
+    logged_in_email = session.get('email')
+    user = crud.get_user_by_email(logged_in_email)
+
+    favs = crud.get_fav_by_user(user.user_id)
+    # print(favs)
+    ratings = crud.get_ratings_by_user(user.user_id)
+    # print(ratings)
+    return render_template('aboutme.html', ratings = ratings, favs = favs)
+
+
+
+@app.route('/manage')
+def manage():
+    logged_in_email = session.get('email')
+    user = crud.get_user_by_email(logged_in_email)
+    return render_template('manage.html', user = user)
+
+
+@app.route('/updateinfo', methods = ['POST'])
+def updateinfo():
+    logged_in_email = session.get('email')
+    user = crud.get_user_by_email(logged_in_email)
+
+
+    fname = request.form['first_name']
+    lname = request.form['last_name']
+    email = request.form['email']
+    session['email'] = email
+
+    
+    new_user = crud.update_info(user.user_id,fname = fname, lname=lname, email=email)
+    flash('Successfully Updated')
+
+    return redirect('/manage')
+
+@app.route('/updatepassword', methods = ['POST'])
+def updatepassword():
+
+
+    logged_in_email = session.get('email')
+    user = crud.get_user_by_email(logged_in_email)
+
+    new_password = request.form['password']
+    conf_password = request.form['conf-password']
+    old_password = request.form['old-password']
+
+    if user.password == old_password:
+        if new_password== conf_password:
+            crud.update_pass(user.user_id, new_pass=new_password)
+            flash('Successfully Updated')
+        else:
+            flash('Passwords Did Not Match!')
+    else:
+        flash('Incorrect Password, Please Try Again')
+    
+       
+
+    return redirect('/manage')
 
 ##########################################
 

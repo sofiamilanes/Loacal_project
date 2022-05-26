@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+
+
+{% block body %}
+
+<body class="text-center">
+    <div class = 'container'>
+
+<div class="row">
+    <h3>Profile</h3>
+
+    <h6>Would you like to update your profile information?</h6>
+
+    <div id='information-form'>
+        <form action="/updateinfo" method="POST"> 
+        <div class="col-mb-12">    
+            <label for="first_name">First Name:</label>
+            <input value = '{{user.fname}}' class="form-control" type="text" name="first_name" id ="first_name" required>
+        </div>
+        <div>
+            <label for="last_name">Last Name:</label>
+            <input value = '{{user.lname}}' class="form-control" type="text" name="last_name" id ="last_name" required>
+        </div>
+        <div class="col-md-12">
+            <label for="email">Email:</label>
+            <input value = '{{user.email}}' class="form-control" type="text" name="email" id ="email" required>
+            <button class="btn btn-primary" type="submit">Update User Info</button>
+
+        </div>
+
+        </form>
+  </div>      
+</div>
+    <div class="row">
+    <h6>Would you like to update your password?</h6>
+
+        <div id='pass-form'>
+
+        <form action='/updatepassword' method="POST"> 
+
+
+        <div class="col-md-12">
+            <label for="password">New Password:</label>
+            <input class="form-control" type="password" name="password" id ="password" required>
+        </div>
+        <div class="col-md-12">
+            <label for="conf-password">Confirm Password:</label>
+            <input class="form-control" type="password" name="conf-password" id ="conf-password" required>
+        </div>
+        <div class="col-md-12">
+            <label for="old-password">Old Password:</label>
+            <input class="form-control" type="password" name="old-password" id ="old-password" required>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Update Password</button>
+        </div>
+        </form>
+        </div>
+</div>
+
+</div>
+
+</body>
+
+
+
+{% endblock %}

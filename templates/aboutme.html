@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<body class="text-center">
+    <div class="container">
+
+    <div>
+    <h3>Your activities </h3>
+    </div>
+    <div class = 'info'>
+        <div class="blocktext">
+        {% for rating in ratings%}
+
+            
+            <!-- {{rating.last_updated.strftime("%Y-%m-%d %H:%M:%S")}} -->
+            {% if rating.created_at.strftime("%Y-%m-%d %H:%M:%S") == rating.last_updated.strftime("%Y-%m-%d %H:%M:%S") %}
+            <div class="info-items">
+                <p>You wrote a review for <a class ='link' href="/results/{{rating.place_ylp_id}}"><b>{{rating.name}}</b></a></p>
+                {% else %}
+            <div class="info-items">
+
+                <p>You edited your review for <a class ='link' href="/results/{{rating.place_ylp_id}}"><b>{{rating.name}}</b></a></p>
+
+            {% endif %}
+                <p>
+                {% for num in range(rating.score|int)%}
+                <span class="fa fa-star checked"></span>
+                {% endfor %}
+    
+                {% for i in range(5 - rating.score|int ) %}
+                <span class="fa fa-star"></span>
+                {% endfor %}
+                </p>
+                <p><i>{{rating.comment}}</i></p>
+            </div>
+          
+            
+
+        {% endfor %}
+        </div>
+        <div class="blocktext">
+            {% for fav in favs%}
+
+
+            <div class="info-items">
+            {%if fav.likes == True%}
+
+                <p>You <span style="color:green;">Added </span><a class ='link' href="/results/{{fav.place_ylp_id}}"><b>{{fav.name}}</b> </a> to Favorites</p>
+
+
+            {% else %}
+                <p>You <span style="color:red;">Removed</span> <a class ='link' href="/results/{{fav.place_ylp_id}}"><b>{{fav.name}}</b></a>  from Favorites</p>
+
+            {% endif %}
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+    </div>
+</body>
+
+{% endblock %}

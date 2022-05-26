@@ -2,6 +2,8 @@
 # from xmlrpc.client import boolean
 from enum import unique
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import func
+import datetime
 
 db = SQLAlchemy()
 
@@ -50,6 +52,8 @@ class Ratings(db.Model):
     favorite_place_id = db.Column(db.Integer, db.ForeignKey("places.place_id"), nullable=False)
     user_id = db.Column(db.Integer,db.ForeignKey("users.user_id"), nullable=False)
     comment = db.Column(db.Text, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.now)
+    last_updated = db.Column(db.DateTime, default=datetime.datetime.now, onupdate=datetime.datetime.now)
    
 
     place = db.relationship("Places", back_populates="rating")
@@ -63,6 +67,8 @@ class User_fav_places(db.Model):
     favorite_place_id = db.Column(db.Integer, db.ForeignKey("places.place_id"), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
     likes = db.Column(db.Boolean, default = True, nullable = False) #*make sure this is how you write it
+    created_at = db.Column(db.DateTime, default=datetime.datetime.now)
+    last_updated = db.Column(db.DateTime, default=datetime.datetime.now, onupdate=datetime.datetime.now)
 
     place = db.relationship("Places", back_populates="fav_place") #!
     user = db.relationship("User", back_populates="fav_place") #!

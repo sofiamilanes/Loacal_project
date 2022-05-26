@@ -5,6 +5,8 @@
     padding: 50px;
     /* border: 1px solid black;
     min-height: 1000px; */
+    /* background-color: aqua;
+    color: aquamarine; */
 
 }
 
@@ -15,7 +17,8 @@ body {
 
     background-position: center 0, center 100px;
 
-
+    /* background-color: blue */
+    /* color: aquamarine; */
 
     background-size: 360px 360px;
 
@@ -64,14 +67,29 @@ h5, h4, h3{
     box-shadow: 5px 10px 10px  rgb(119, 136, 136);
 
 }
+.col-md-12{
+padding: 5px;
+}
 
+#information-form, #pass-form{
+    text-shadow: 1px 1px 1px rgb(200, 148, 195);
+    background-color: aliceblue;
+    width: 100%;
+    padding: 45px;
+    margin: 0 auto;
+    margin-bottom: 25px;
+    max-width: 350px;
+    border: 1px solid black;
+    box-shadow: 5px 10px 10px  rgb(119, 136, 136);
+
+}
 
 
 
 
 /* images *********************************************************************** */
 
-img{
+.imgs{
     /* border: 5px solid rgb(173, 80, 210); */
     margin: 30px;
     width: 330px;
@@ -80,7 +98,7 @@ img{
 }
 
 /* This is the hover one */
-img:hover{
+.imgs:hover{
 
 -webkit-transform: scale(1.2);
 -ms-transform: scale(1.2);
@@ -89,17 +107,19 @@ transition: 1s ease;
 }
 
 
-.image-info{
+/* .image-info{
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} */
 
 
 
 .results{
 background-color: aliceblue;
     padding: 30px;
+    border-bottom: 1px solid rgb(248, 227, 250);
+    /* border-top: 1px solid black; */
 }
 
 
@@ -247,4 +267,49 @@ footer{
 }
 nav{
     background-color: #a0e9e9d4;
+}
+
+#dropdownMenuButton1{
+    text-shadow: 1px 1px 1px rgb(250, 84, 233);
+    
+    color: black;
+    background-color: #a0e9e99e;
+
+   /* background-color: rgb(226, 159, 227); */
+}
+
+/* ################################### */
+
+
+.blocktext {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    width: 500px;
+    /* border-bottom: 1px solid rgb(248, 227, 250); */
+    background-color: aliceblue;
+
+    /* border-bottom: 1px solid black;
+    border-top: 1px solid black; */
+
+}
+.info{
+    display: flex;
+}
+.info-items{
+    border-bottom: 1px solid rgb(248, 227, 250);
+    min-height: 100px;
+    padding: 10px;
+
+
+}
+a.nav-link{
+    color: black;
+    text-shadow: 1px 1px 1px rgb(245, 153, 235);
+
+}
+
+.link{
+    text-decoration: none;
+    color: black;
 }

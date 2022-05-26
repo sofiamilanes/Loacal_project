@@ -4,8 +4,10 @@
 <body class="text-center">
     <div class="container">
         <div class="row">
-            <div id = 'rating-form'>
 
+        <h1>Edit your review! </h1>
+
+            <div id = 'rating-form'>
 
                 <form action="/{{id}}/editrating" method="post">
                 <div class="col-md-12">  
@@ -23,10 +25,12 @@
 
                 <div class="col-md-12">  
                     <label for="comment">Comment:</label>
-                    <textarea class="form-control" name="comment" id="comment" rows="4" cols="50" placeholder="{{rated.comment}}"></textarea> </textarea>
+                    <textarea class="form-control" name="comment" id="comment" rows="4" cols="50" placeholder="{{rated.comment}}"></textarea>
                     </div>
-                    <button type="submit">rate</button>
+                    <button class=" btn btn-info" type="submit">Edit</button>
                 </form>
+                <!-- <button value = '{{id}}' class=" delete fa fa-trash btn-danger btn-sm" type="submit">Delete</button> -->
+
                 </div>
         </div>
 
