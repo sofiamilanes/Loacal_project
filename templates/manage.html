@@ -6,19 +6,23 @@
 
 <body class="text-center">
     <div class = 'container'>
+    <h2>Profile</h2><br>
 
 <div class="row">
-    <h3>Profile</h3>
 
-    <h6>Would you like to update your profile information?</h6>
+
+<div class="col">
+
+
+    <h5>Would you like to update your profile information?</h5><br>
 
     <div id='information-form'>
         <form action="/updateinfo" method="POST"> 
-        <div class="col-mb-12">    
+        <div class="col-md-12">    
             <label for="first_name">First Name:</label>
             <input value = '{{user.fname}}' class="form-control" type="text" name="first_name" id ="first_name" required>
         </div>
-        <div>
+        <div class="col-md-12"> 
             <label for="last_name">Last Name:</label>
             <input value = '{{user.lname}}' class="form-control" type="text" name="last_name" id ="last_name" required>
         </div>
@@ -32,8 +36,8 @@
         </form>
   </div>      
 </div>
-    <div class="row">
-    <h6>Would you like to update your password?</h6>
+    <div class="col">
+    <h5>Would you like to update your password?</h5><br>
 
         <div id='pass-form'>
 
@@ -60,7 +64,7 @@
 </div>
 
 </div>
-
+</div>
 </body>
 
 

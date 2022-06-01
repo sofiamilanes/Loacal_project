@@ -18,7 +18,7 @@
 
         {% for rating in ratings%}
         <tr class = 'ratings_row'>
-            <td>{{rating.fname}} {{rating.lname[0].upper()}}.</td>
+            <td>{{rating.fname.title()}} {{rating.lname[0].upper()}}.</td>
             <td>
             {% for num in range(rating.score|int)%}
             <span class="fa fa-star checked"></span>

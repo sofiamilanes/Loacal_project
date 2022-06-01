@@ -1,40 +1,44 @@
 {% extends 'base.html' %}
 
-
-
 {% block body %}
+
 
 <body class="text-center">
     <div class="container">
-
-        <div class = 'title'>
-                <h2>{{results.name}}</h2>
-        </div>
-        {% if 'email' in  session %}
-        
-                
-                <a href="/{{results.id}}/add_fav" class="btn btn-outline-success btn-sm">Add to Favorites <span class="fa fa-heart"></span> </a>
-        {% endif %}
-        <div class = "categories">
-
-            {{results.categories[0].title}}
-
-        </div>
-            <div class = img>
-                <img class = 'imgs' src="{{results.image_url}}" alt="{{results.name}} img">
+              <h2>{{results.name}}</h2>       
+        <div class = 'information-containers'>
+            <div class = 'title'>
+   
             </div>
-            <div id = 'rate'>
 
+        {% if 'email' in  session %}
+
+            <a href="/{{results.id}}/add_fav" class="btn btn-outline-success btn-sm">Add to Favorites <span class="fa fa-heart"></span> </a>
+        {% endif %}
+            <div class = "categories">
+                {{results.categories[0].title}}
+            </div>
+
+            <div class = "scroll">
+                <div class = 'img-container'>
+                    {% for photo in results.photos%}
+                    <img src="{{photo}}" alt="">
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class = img>
+                <!-- <img class = 'imgs' src="{{results.image_url}}" alt="{{results.name}} img"> -->
+            </div>
+
+            <div id = 'rate'>
                 {% for num in range(average[0]|int)%}
                 <span class="fa fa-star checked"></span>
                 {% endfor %}
                 {% for num in range(5 - average[0]|int)%}
                 <span class="fa fa-star"></span>
                 {% endfor %}
-
                 <p>{{average}}</p>
- 
-
             </div>
 
             <div id = 'ratings'>
@@ -47,78 +51,72 @@
                     {% endif %}
                 {% endif %} 
                 <a href="/{{results.id}}/viewRatings" class="btn btn-outline-success btn-sm">View Reviews</a>
-
             </div>
 
+            <div class=" location-hours">
+                <div class="title-hours">
+                    <h5>Location & Hours</h5> 
+                </div>
+                <div class="row hour-info">
+                    <div class = "col-4 address">
+                        <h5>Address: </h5>
+                        <address> 
+                            {% for item in results.location.display_address%}
+                            {{item}}
+                            <br>
+                            {% endfor%}
+                            {% if (results.location.address1 != None and results.location.address1 != '') %}
+                            <form id = "location-form" action="/maps", method="GET">
+                                <input type="hidden" id="latitude" name="latitude" value="{{results.coordinates['latitude']}}">
+                                <input type="hidden" id="longitude" name="longitude" value="{{results.coordinates['longitude']}}">
+                                <button type="submit" class ="btn btn-outline-success btn-sm"> Get Directions <span class="fa fa-car "></span></button>
+                            </form>
+                            {% endif %}
+                        </address>
+                    </div>
+                            {% if 'hours' in results%}
+                        <div class=" col-4 time">
+                            <table id = 'time'>
+                                <tr>
+                                    <th>Day</th>
+                                    <th>Open</th>
+                                    <th> </th>
+                                    <th>Close</th>
+                                </tr>
+                                {% for item in Hours %}
+                                <tr>
+                                    <th>{{days[item]}}</th>
+                                    <td>{{Hours[item]['start']}}</td>
+                                    <td>-</td>
+                                    <td>{{Hours[item]['end']}}</td>
+                                {% endfor%}
+                                </tr>
+                            </table>
+                            
+                        </div>
 
-<div class=" location-hours">
-    <div class="title-hours">
-    <h5>Location & Hours</h5> 
-    </div>
-    <div class="row hour-info">
-        <div class = "col-4 address">
-            <h5>Address: </h5>
-            <address> 
-                {% for item in results.location.display_address%}
-                {{item}}
-                <br>
-                {% endfor%}
-                {% if (results.location.address1 != None and results.location.address1 != '') %}
-                <form id = "location-form" action="/maps", method="GET">
-                    <input type="hidden" id="latitude" name="latitude" value="{{results.coordinates['latitude']}}">
-                    <input type="hidden" id="longitude" name="longitude" value="{{results.coordinates['longitude']}}">
+                        {% else %}
+                        <div class=" col-4 time">
+                            <h6> Hours Currently Not Available </h6>
+                        </div>
+                            {% endif %}
+                            <div class = 'col-4 contact'>
+                                <h5>  Phone number :  </h5>
+                                {% if results.display_phone != ''%}
+                                <p>  {{results.display_phone}}  </p>
+                                <a href="tel:{{results.phone}}"  class="btn btn-outline-success btn-sm"> Call Now <span class="fa fa-phone "></span></a>
+                                {% else %}
+                                <h6> Currently Not Available </h6>
+                                {% endif %}
+                            </div>
+                </div>
 
 
-                    <button type="submit" class ="btn btn-outline-success btn-sm"> Get Directions <span class="fa fa-car "></span></button>
-                  </form>
-                {% endif %}
-            </address>
-
-</div>
-            
-            
-            
-                {% if 'hours' in results%}
-                <div class=" col-4 time">
-                <table id = 'time'>
-                    <tr>
-                        <th>Day</th>
-                        <th>Open</th>
-                        <th> </th>
-                        <th>Close</th>
-                    </tr>
-
-                    {% for item in Hours %}
-                    <tr>
-                        <th>{{days[item]}}</th>
-                        <td>{{Hours[item]['start']}}</td>
-                        <td>-</td>
-                        <td>{{Hours[item]['end']}}</td>
-
-
-                    {% endfor%}
-                    </tr>
-                </table>
-                
             </div>
-            {% else %}
-            <div class=" col-4 time">
-            <h6> Hours Currently Not Available </h6>
-                </div>
-                {% endif %}
-                <div class = 'col-4 contact'>
-                    <h5>  Phone number :  </h5>
-                    {% if results.display_phone != ''%}
-                    <p>  {{results.display_phone}}  </p>
-                    <a href="tel:{{results.phone}}"  class="btn btn-outline-success btn-sm"> Call Now <span class="fa fa-phone "></span></a>
-                    {% else %}
-                    <h6> Currently Not Available </h6>
-                    {% endif %}
-                </div>
-
-    </div>
-</div>
+        </div>
         <a href="/results" class="btn btn-secondary"> Look Up Different Location</a>
+
+    </div>
 
 
 

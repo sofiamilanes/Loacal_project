@@ -3,26 +3,34 @@
 {% block body %}
 
 <body class="text-center">
+    
     <div class="container">
-        <h1>Results</h1>
+        <h2> Results for Local {{term}} in {{location}}</h2>
+
+
+<div class="all">
+        <div class ="row">
     {% for result in results %}
-        <div class = "row">
-            <div class="results">
-                <div class="col-12">
+        <div class="col-4">
+            <div class="all_results">
+
                 <h4>{{results[result].name}}</h4>
+
+                <img class = 'sml_img' src="{{results[result].img}}" alt=""><br>
+                <p>{{results[result].price}}</p>
                 <p>Location: {{results[result].city}}, {{results[result].state}}</p>
                 
-            </div>
 
-            <div class="col-12">
-                <a href="/results/{{results[result].id}}" class="btn btn-outline-info btn-sm">View More Details</a>
-                </div>
-            </div>
+                <a href="/results/{{results[result].id}}" class="btn btn-outline-info btn-sm">View More Details</a>                
+
+            </div>  
         </div>
 
 
-
     {% endfor %}
+     
+      </div>
+</div>
         <div>
             <a href="/homepage" class="btn btn-secondary"> Search for Another Place</a>
         </div>

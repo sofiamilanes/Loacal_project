@@ -37,9 +37,9 @@ def update_pass(user_id, new_pass):
 
 ############################################ Places
 
-def create_place(place_ylp_id, name, city, zip_code, address):
+def create_place(place_ylp_id, name, city, zip_code, address,type , img):
 
-    place = Places(place_ylp_id = place_ylp_id,name = name, city = city, zip_code = zip_code, address = address)
+    place = Places(place_ylp_id = place_ylp_id,name = name, city = city, zip_code = zip_code, address = address, type = type, img = img)
     print('successfully added')
     db.session.add(place)
     db.session.commit()
@@ -121,7 +121,12 @@ def update_rating(user, place, score, comment):
 ###################################################### Favorites
 
 def get_fav_by_user(user):
-    fav = db.session.query(Places.name, Places.place_ylp_id, Places.city, User_fav_places.likes,User_fav_places.created_at,User_fav_places.last_updated ).join(User_fav_places).filter(User_fav_places.favorite_place_id == Places.place_id).join(User).filter(user == User_fav_places.user_id).order_by(User_fav_places.last_updated.desc()).all()
+    fav = db.session.query(Places.name, Places.place_ylp_id, Places.city,Places.address,Places.type,Places.img, User_fav_places.likes,User_fav_places.created_at,User_fav_places.last_updated ).join(User_fav_places).filter(User_fav_places.favorite_place_id == Places.place_id).join(User).filter(user == User_fav_places.user_id).order_by(User_fav_places.last_updated.desc()).limit(20).all()
+
+    return fav
+
+def get_fav_by_user_type(user):
+    fav = db.session.query(Places.name, Places.place_ylp_id, Places.city,Places.address,Places.type,Places.img, User_fav_places.likes,User_fav_places.created_at,User_fav_places.last_updated ).join(User_fav_places).filter(User_fav_places.favorite_place_id == Places.place_id).join(User).filter(user == User_fav_places.user_id).order_by(Places.type.desc()).all()
 
     return fav
 

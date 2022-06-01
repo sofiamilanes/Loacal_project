@@ -5,7 +5,8 @@
 {% block body %}
 <body class="text-center">
     <div class="container">
-        <h1>Add a review! </h1>
+        <h2>Add a review for <i>{{results.name}}</i>! </h2><br>
+        
         <div class="row">
             <div id = 'rating-form'>
                 <form action="/{{id}}/rating" method="post">
@@ -30,6 +31,10 @@
                 </div>
         </div>
 
+        <h6>Don't want to add a review? </h6>
+
+        <a href="/results/{{results.id}}"  class="btn btn-outline-success btn-sm"> Go Back </a>
+        <a href="/{{results.id}}/viewRatings" class="btn btn-outline-success btn-sm"> View Reviews</a>
     </div>
 
 

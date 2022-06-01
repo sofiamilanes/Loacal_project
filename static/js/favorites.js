@@ -17,8 +17,38 @@ for ( const button of buttons){
 
 
 
-// const btndelete = document.querySelector('.delete');
+$(document).ready(function(){
+        // $( "div.results-form" ).toggle( 1800 );
+        $( "div.results-form" ).slideDown( 1050 );
+        $( "div#account-form" ).slideDown( 1050 );
+        $( "div#login-form" ).slideDown( 1050 );
+        $( "div.blocktext" ).slideDown( 1050 );
+        $( "div#information-form" ).slideDown( 1050 );
+        $( "div#pass-form" ).slideDown( 1050 );
+        $( "div#rating-form" ).slideDown( 1050 );
+        $( "div#rating-form" ).slideDown( 1050 );
+        $( "div.all" ).toggle( 1050 );
 
-// function deleteReview(evt){
 
-// }
+        // $( "div.img-container img" ).delay(500).fadeIn( 400 );
+
+
+
+
+
+
+        $( "div.quote" ).slideDown( 1750 );
+        // $( "h1" ).slideDown( 1750 );
+
+
+
+        $( "div.information-container" ).toggle( 1300 );
+        $( "div.information-containers" ).slideDown( 1050 );
+
+        // $( "div.information-container" ).slideDown( 1300 );
+
+
+
+
+
+  });

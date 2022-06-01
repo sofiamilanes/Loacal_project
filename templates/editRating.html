@@ -5,10 +5,10 @@
     <div class="container">
         <div class="row">
 
-        <h1>Edit your review! </h1>
+        <h2>Edit your review for <i>{{results.name}}</i>! </h2><br>
 
+            <h4></h4>
             <div id = 'rating-form'>
-
                 <form action="/{{id}}/editrating" method="post">
                 <div class="col-md-12">  
                     <label for="rating"><h6>What would you rate this place?</h6></label>
@@ -33,6 +33,9 @@
 
                 </div>
         </div>
+        <h6>Don't want to edit your review? </h6>
+        <a href="/results/{{results.id}}"  class="btn btn-outline-success btn-sm"> Go Back </a>
+        <a href="/{{results.id}}/viewRatings" class="btn btn-outline-success btn-sm"> View Reviews</a>
 
     </div>
 

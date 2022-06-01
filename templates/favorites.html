@@ -5,20 +5,123 @@
 {% block body %}
 <body class="text-center">
     <div class="container">
-        <h1>Welcome to your favorites!</h1>
+
+        <h2>Welcome to your favorites!</h2>
+        <div class = 'information-container'>
+
+        <h4>Coffee Favorites</h4>
+            <div class="typeof">
+
         {% for fav in favorites%}
             {% if fav.likes == True%}
-
+                {% if fav.type == 'Coffee'%}
+                
                 <div class="results" id="{{fav.place_ylp_id}}">
                     <h3>{{fav.name}}</h3>
                     <p>Location: {{fav.city}}</p>
-
+                    <img class = 'sml_img' src="{{fav.img}}" alt=""><br>
                     <a  href='results/{{fav.place_ylp_id}}' class="btn btn-outline-info btn-sm">View Details</a> <br>
 
                     <button value='{{fav.place_ylp_id}}' class="remove btn btn-outline-danger btn-sm">Remove</button>
                 </div>
+                {% endif %}
             {% endif %}
         {% endfor%}
+            </div>
+
+
+        <h4>Bakeries Favorites</h4>
+        <div class="typeof">    
+            {% for fav in favorites%}
+                {% if fav.likes == True%}
+                    {% if fav.type == 'Bakeries'%}
+                    <div class="results" id="{{fav.place_ylp_id}}">
+                        <h3>{{fav.name}}</h3>
+                        <p>Location: {{fav.city}}</p>
+                        <img class = 'sml_img' src="{{fav.img}}" alt=""><br>
+                        <a  href='results/{{fav.place_ylp_id}}' class="btn btn-outline-info btn-sm">View Details</a> <br>
+                        <button value='{{fav.place_ylp_id}}' class="remove btn btn-outline-danger btn-sm">Remove</button>
+                    </div>
+                    
+                    {% endif %}
+                {% endif %}
+            {% endfor%}
+        </div>
+
+                <h4>Desserts Favorites</h4>
+
+                <div class="typeof">
+                    {% for fav in favorites%}
+                        {% if fav.likes == True%}
+                            {% if fav.type == 'Desserts'%}
+                            <div class="results" id="{{fav.place_ylp_id}}">
+                                <h3>{{fav.name}}</h3>
+                                <p>Location: {{fav.city}}</p>
+                                <img class = 'sml_img' src="{{fav.img}}" alt=""><br>
+                                <a  href='results/{{fav.place_ylp_id}}' class="btn btn-outline-info btn-sm">View Details</a> <br>
+                                <button value='{{fav.place_ylp_id}}' class="remove btn btn-outline-danger btn-sm">Remove</button>
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor%}
+                </div>
+                <h4>Restaurants Favorites</h4>
+
+                            <div class="typeof">
+                                {% for fav in favorites%}
+                                    {% if fav.likes == True%}
+                                        {% if fav.type == 'Restaurants'%}
+                                        <div class="results" id="{{fav.place_ylp_id}}">
+                                            <h3>{{fav.name}}</h3>
+                                            <p>Location: {{fav.city}}</p>
+                                            <img class = 'sml_img' src="{{fav.img}}" alt=""><br>
+                                            <a  href='results/{{fav.place_ylp_id}}' class="btn btn-outline-info btn-sm">View Details</a> <br>
+                                            <button value='{{fav.place_ylp_id}}' class="remove btn btn-outline-danger btn-sm">Remove</button>
+                                        </div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor%}
+                            </div>
+
+
+        <h4>Floral Favorites</h4>
+
+            <div class="typeof">    
+            {% for fav in favorites%}
+                {% if fav.likes == True%}
+                    {% if fav.type == 'Florals'%}
+                    <div class="results" id="{{fav.place_ylp_id}}">
+                        <h3>{{fav.name}}</h3>
+                        <p>Location: {{fav.city}}</p>
+                        <img class = 'sml_img' src="{{fav.img}}" alt=""><br>
+                        <a  href='results/{{fav.place_ylp_id}}' class="btn btn-outline-info btn-sm">View Details</a> <br>
+                        <button value='{{fav.place_ylp_id}}' class="remove btn btn-outline-danger btn-sm">Remove</button>
+                    </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor%}
+                </div>
+
+
+
+                <h4>Bar Favorites</h4>
+
+                <div class="typeof">    
+                {% for fav in favorites%}
+                    {% if fav.likes == True%}
+                        {% if fav.type == 'Bars'%}
+                        <div class="results" id="{{fav.place_ylp_id}}">
+                            <h3>{{fav.name}}</h3>
+                            <p>Location: {{fav.city}}</p>
+                            <img class = 'sml_img' src="{{fav.img}}" alt=""><br>
+                            <a  href='results/{{fav.place_ylp_id}}' class="btn btn-outline-info btn-sm">View Details</a> <br>
+                            <button value='{{fav.place_ylp_id}}' class="remove btn btn-outline-danger btn-sm">Remove</button>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor%}
+                    </div>
+</div>
 
             <div>
             <a href="/results" class="btn btn-secondary">Back to results</a>

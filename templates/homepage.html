@@ -14,9 +14,9 @@
             <p> Don't have an account yet? <a href="/">Create account</a></p>
         </div>
             {% endif %}
-            <p class="lead">Thank you for supporting your local businesses! </p>
+            <p class="lead">Thank you for supporting your local businesses! </p><br>
         
-        <div id ='results-form'>
+        <div class ='results-form'>
             <form action='/results' method="POST">
                 <div class="col-md-12" >
                     <label for="form-select">Category:</label>
@@ -24,11 +24,11 @@
                     <select class="form-select" name="type" id="place-type">
                 
                     <option value="Coffee">Coffee & Tea</option>
-                    <option value="restaurants">Restaurants</option>
-                    <option value="bakery">Bakery</option>
-                    <option value="bars">Bars</option>
-                    <option value="desserts">Desserts</option>
-                    <option value="floral">Floral</option>
+                    <option value="Restaurants">Restaurants</option>
+                    <option value="Bakeries">Bakery</option>
+                    <option value="Bars">Bars</option>
+                    <option value="Desserts">Desserts</option>
+                    <option value="Florals">Floral</option>
                     </select>
             </div>
             <div class=" col-md-12">
@@ -38,10 +38,16 @@
                 <button type="submit" class="btn btn-primary"> Search </button>
 
             </form>
+        </div><br>
+        <div class ='quote hidden'>
+            <p>" When you support a SMALL BUSINESS</p> 
+            <p> you are supporting a BIG DREAM " </p>
         </div>
-
         </div>
 
     </div>
+
+
+    <script src="static/js/favorites.js"></script>
 </body>
 {% endblock %}

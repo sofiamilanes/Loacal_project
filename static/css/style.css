@@ -7,7 +7,26 @@
     min-height: 1000px; */
     /* background-color: aqua;
     color: aquamarine; */
+    /* background-color: aliceblue; */
+    /* background-color: aliceblue; */
 
+    /* max-width: 350px; */
+    /* box-sizing: border-box; */
+/* display: none; */
+
+}
+.information-containers{
+    height: 950px;
+    overflow: auto;
+    margin-top: 30px;
+    display: none;
+}
+.information-container{
+    height: 950px;
+    overflow: auto;
+    margin-top: 30px;
+
+    display: none;
 }
 
 body {
@@ -33,6 +52,7 @@ body {
 h1{
     padding: 35px;
     text-shadow: 3px 3px 3px rgb(149, 203, 203);
+    /* display: none; */
 
 }
 
@@ -40,6 +60,9 @@ h2{
     text-shadow: 2px 2px 4px rgb(200, 148, 195);
     padding: 30px;
     background-color: rgb(204, 229, 229);
+    /* display: none; */
+
+    
 }
 h5, h4, h3{
     text-shadow: 1px 1px 2px rgb(200, 148, 195);
@@ -55,7 +78,25 @@ h5, h4, h3{
 
 /* Forms ********************************************************************* */
 
-#account-form, #login-form, #results-form, #rating-form{
+#account-form, #login-form, #rating-form{
+    text-shadow: 1px 1px 1px rgb(200, 148, 195);
+    background-color: aliceblue;
+    width: 100%;
+    padding: 45px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    max-width: 350px;
+    border: 1px solid black;
+    box-shadow: 5px 10px 10px  rgb(119, 136, 136);
+    display: none;
+
+    
+
+
+}
+
+ .results-form{
     text-shadow: 1px 1px 1px rgb(200, 148, 195);
     background-color: aliceblue;
     width: 100%;
@@ -65,6 +106,7 @@ h5, h4, h3{
     max-width: 350px;
     border: 1px solid black;
     box-shadow: 5px 10px 10px  rgb(119, 136, 136);
+    display: none;
 
 }
 .col-md-12{
@@ -78,9 +120,11 @@ padding: 5px;
     padding: 45px;
     margin: 0 auto;
     margin-bottom: 25px;
+    /* padding-top: 300px; */
     max-width: 350px;
     border: 1px solid black;
     box-shadow: 5px 10px 10px  rgb(119, 136, 136);
+    display: none;
 
 }
 
@@ -117,8 +161,11 @@ transition: 1s ease;
 
 .results{
 background-color: aliceblue;
-    padding: 30px;
+    padding: 40px;
+    min-height: 500px;
+    min-width: 400px;
     border-bottom: 1px solid rgb(248, 227, 250);
+
     /* border-top: 1px solid black; */
 }
 
@@ -178,7 +225,7 @@ th, td{
     background-color: rgb(204, 229, 229);
 }
 .title-hours{
-    padding: 45px;
+    /* padding: 45px; */
     padding-top: 60px;
     /* display: flex; */
 }
@@ -229,6 +276,7 @@ a.btn-outline-success, button.btn-outline-success{
 #map{
     width: 1100px;
     height: 800px;
+    margin: auto;
 }
 
 #map_side{
@@ -282,10 +330,13 @@ nav{
 
 
 .blocktext {
+    overflow: auto;
     margin-left: auto;
     margin-right: auto;
     padding: 20px;
     width: 500px;
+    max-height: 800px;
+    display: none;
     /* border-bottom: 1px solid rgb(248, 227, 250); */
     background-color: aliceblue;
 
@@ -298,8 +349,12 @@ nav{
 }
 .info-items{
     border-bottom: 1px solid rgb(248, 227, 250);
-    min-height: 100px;
+    min-height: 120px;
     padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+
+    
 
 
 }
@@ -312,4 +367,78 @@ a.nav-link{
 .link{
     text-decoration: none;
     color: black;
+}
+
+
+
+/*! In-progress  ******************************************************************* */
+
+
+.all_results{
+    padding: 20px;
+    border-bottom: 1px solid rgb(248, 227, 250);
+    /* border: 1px solid rgb(248, 227, 250); */
+
+    min-height: 450px;
+    /* display: none; */
+}
+
+.all{
+    background-color: aliceblue;
+    height: 810px;
+    /* max-width: 350px; */
+    /* box-sizing: border-box; */
+    overflow: auto;
+    margin-top: 30px;
+    display: none;
+
+}
+
+
+
+.sml_img{
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+/*! In-progress  ******************************************************************* */
+
+.scroll{
+    padding: 1rem;
+    max-width: 500px;
+    margin: auto;
+}
+.img-container{
+    display: flex;
+    gap: 20px;
+    background-color: rgba(250, 235, 215, 0.355);
+    overflow: auto;
+}
+
+.img-container img{
+    height: 500px;
+    max-width: 400px;
+
+
+}
+
+.typeof{
+    overflow: auto;
+    background-color: aliceblue;
+    min-height: 400px;
+    margin-bottom : 40px;
+    display: flex;
+    
+}
+/* .information-container{
+    display: none;
+} */
+.quote{
+    margin-top: 100px;
+    font-family: cursive;
+    font-size:xx-large;
+    color: rgba(0, 0, 0, 0.336);
+    display: none;
+ 
 }

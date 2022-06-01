@@ -102,9 +102,12 @@ def authentication():
 def results2():
 
     results = session['list']
+    term = session['term']
+    location = session['location']
+    # print(results)
 
 
-    return render_template('results.html', results = results)
+    return render_template('results.html', results = results, location = location, term = term )
 
 
 
@@ -116,10 +119,15 @@ def results():
 
     session['list'] = {}
 
-    term = request.form['type']
-    location = request.form['location']
+
+    session['term'] = request.form['type']
+    session['location'] = request.form['location']
+
+    term = session['term']
+    location =session['location']
 
     results = get_results(term, location)
+    # print(results['businesses'][0])
     if 'businesses' not in results:
         flash("Invalid City, Please Try Again")
         return redirect('/homepage')
@@ -130,6 +138,10 @@ def results():
             session['list'][place['id']]['id'] =[place][0]["id"]
             session['list'][place['id']]['city'] =[place][0]["location"]['city']
             session['list'][place['id']]['state'] =[place][0]["location"]['state']
+            session['list'][place['id']]['img'] =[place][0]['image_url']
+            session['list'][place['id']]['price'] =[place][0].get('price','Not available')
+
+    # print(session['list'])
             # session['list'][place['id']]['coordinates'] = [place][0]["coordinates"]#! DONT THINK I NEED THIS!
 
 
@@ -176,7 +188,7 @@ def results_info(id):
 
     #* This is sending the days to the html for me to use (days)
     Days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    print(Hours)
+    # print(Hours)
 
     return render_template('results_details.html', results = results, days = Days, Hours = Hours, average=average, rated = rated, user = user)
 
@@ -189,17 +201,22 @@ def results_info(id):
 @app.route('/<id>/addRatings')
 def add_ratings(id):
     id = id
-    return render_template('rate.html', id = id)
+    results = search_by_id(id)
+
+    return render_template('rate.html', id = id, results = results)
 
 @app.route('/<id>/editrating')
 def editrating(id):
     id = id
+    results = search_by_id(id)
+
     user = crud.get_user_by_email(session.get('email'))
     place_id = crud.get_placeId_byyelp(id)
+    
     rated = crud.get_rating(user.user_id, place_id)
 
 
-    return render_template('editRating.html', rated = rated, id = id)
+    return render_template('editRating.html', rated = rated, id = id, results = results)
 
 
 @app.route('/<id>/editrating', methods = ['POST'])
@@ -219,11 +236,11 @@ def rating(id):
     comment = request.form['comment']
     results = search_by_id(id)
     check_db_place = crud.search_by_ylpid(id)
-    print(comment)
+    # print(comment)
 
     logged_in_email = session.get('email')
     user = crud.get_user_by_email(logged_in_email)
-    print("THIS IS THE USER", user.user_id)
+    # print("THIS IS THE USER", user.user_id)
 
     if check_db_place == None:
 
@@ -232,7 +249,9 @@ def rating(id):
         city = results['location']['city']
         zip_code = results['location']['zip_code']
         address = results['location']['address1']
-        place = crud.create_place(place_ylp_id = place_ylp_id, name=name, city=city, zip_code= zip_code, address=address)
+        typeof = session['term']
+        img = results['image_url']
+        place = crud.create_place(place_ylp_id = place_ylp_id, name=name, city=city, zip_code= zip_code, address=address, type = typeof, img = img)
         rating = crud.create_ratings(score= score, place_id=place.place_id, user_id=user.user_id,comment=comment)
 
     else:
@@ -243,7 +262,7 @@ def rating(id):
 @app.route('/<id>/viewRatings')
 def view_ratings(id):
     id = id
-    print("THIS IS THE ID",id)
+    # print("THIS IS THE ID",id)
     check_db_place = crud.search_by_ylpid(id)
     # print("THIS IS THE PLACE",check_db_place)
     
@@ -295,7 +314,9 @@ def add_fav(id):
         city = results['location']['city']
         zip_code = results['location']['zip_code']
         address = results['location']['address1']
-        place = crud.create_place(place_ylp_id = place_ylp_id, name=name, city=city, zip_code= zip_code, address=address)
+        typeof = session['term']
+        img = results['image_url']
+        place = crud.create_place(place_ylp_id = place_ylp_id, name=name, city=city, zip_code= zip_code, address=address, type = typeof, img = img)
         # print(place)
         # print(place.place_id)
         # check_db_place = crud.search_by_ylpid(id)
@@ -334,7 +355,8 @@ def unlike(id):
 def fav_list():
     logged_in_email = session.get('email')
     user = crud.get_user_by_email(logged_in_email)
-    favs = crud.get_fav_by_user(user.user_id)
+    favs = crud.get_fav_by_user_type(user.user_id)
+    print(favs)
     # print(favs.likes)
 
     return render_template('favorites.html', favorites = favs)
