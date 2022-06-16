@@ -4,7 +4,7 @@ import requests
 import os 
 
 
-API_KEY = ""
+API_KEY = os.environ['API_KEY']
 url = "https://api.yelp.com/v3/businesses/search"
 HEADER = {'Authorization': 'Bearer %s ' % API_KEY}
 

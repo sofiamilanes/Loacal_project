@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 
 {% block body %}
+
 <body class="text-center">
+    
+
     <div class="container">
-        <div>
+      
+        <div class="main">
+            <div class = 'ball'></div> 
             {% if 'email' in session %}
-        <h1>Welcome {{session['first_name']}}!</h1>
+        <h1 class="title">Welcome {{session['first_name']}}!</h1>
 
             {% else %}
         <h1> Welcome! </h1> 
@@ -14,7 +19,7 @@
             <p> Don't have an account yet? <a href="/">Create account</a></p>
         </div>
             {% endif %}
-            <p class="lead">Thank you for supporting your local businesses! </p><br>
+            <p class="lead"><big>Thank you for supporting your local businesses!</big> </p><br>
         
         <div class ='results-form'>
             <form action='/results' method="POST">
@@ -38,13 +43,15 @@
                 <button type="submit" class="btn btn-primary"> Search </button>
 
             </form>
+
+
+
         </div><br>
         <div class ='quote hidden'>
-            <p>" When you support a SMALL BUSINESS</p> 
-            <p> you are supporting a BIG DREAM " </p>
+            <p class="quotes">" When you support a <big>Small Business</big></p> 
+            <p class="quotes"> you are supporting a <big>Big Dream </big>" </p>
         </div>
         </div>
-
     </div>
 
 

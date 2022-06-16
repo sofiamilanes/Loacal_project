@@ -3,7 +3,7 @@
 {% block body %}
 
 <body class="text-center">
-    
+
     <div class="container">
         <h2> Results for Local {{term}} in {{location}}</h2>
 
@@ -17,8 +17,8 @@
                 <h4>{{results[result].name}}</h4>
 
                 <img class = 'sml_img' src="{{results[result].img}}" alt=""><br>
-                <p>{{results[result].price}}</p>
-                <p>Location: {{results[result].city}}, {{results[result].state}}</p>
+                <p class = "money">{{results[result].price}}</p>
+                <p><small><i class="fa fa-map-pin" aria-hidden="true"></i></small> Location: <i>{{results[result].city}}, {{results[result].state}}</i></p>
                 
 
                 <a href="/results/{{results[result].id}}" class="btn btn-outline-info btn-sm">View More Details</a>                

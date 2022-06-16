@@ -32,12 +32,11 @@
                 </p>
                 <p><i>{{rating.comment}}</i></p>
                 <div class="col-3">
-                <small><i>{{rating.last_updated.strftime("%m-%d-%Y")}}</i>  </small>                  
+                <small><i>{{rating.last_updated.strftime("%m/%d/%Y")}}</i>  </small>                  
                 </div>
 
             </div>
-          
-            
+
 
         {% endfor %}
         </div>
@@ -50,13 +49,13 @@
 
                 <p>You <span style="color:green;">Added </span><a class ='link' href="/results/{{fav.place_ylp_id}}"><b>{{fav.name}}</b> </a> to your Favorites</p><br>
                 <div class="col-3">
-                <small><i>{{fav.last_updated.strftime("%m-%d-%Y")}} </i> </small>  
+                <small><i>{{fav.last_updated.strftime("%m/%d/%Y")}} </i> </small>  
                 </div>
 
             {% else %}
                 <p>You <span style="color:red;">Removed</span> <a class ='link' href="/results/{{fav.place_ylp_id}}"><b>{{fav.name}}</b></a>  from Favorites</p><br>
                 <div class="col-3">
-                    <small><i>{{fav.last_updated.strftime("%m-%d-%Y")}} </i> </small>  
+                    <small><i>{{fav.last_updated.strftime("%m/%d/%Y")}} </i> </small>  
                 </div>
             {% endif %}
             </div>

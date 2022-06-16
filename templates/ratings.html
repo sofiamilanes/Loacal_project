@@ -5,15 +5,15 @@
 {% block body %}
 <body class="text-center">
     <div class="container">
-    <h3>Reviews for {{ratings[0].name}} </h3>
+    <h2>Reviews for {{ratings[0].name}} </h2>
 
-
+<div class="rating_table">
     <table id = 'ratings_table'>
 
         <tr class = 'ratings_row'>
             <th>Name</th>
-            <th>score</th>
-            <th>comment</th>
+            <th>Score</th>
+            <th>Comment</th>
         </tr>
 
         {% for rating in ratings%}
@@ -28,7 +28,7 @@
             <span class="fa fa-star"></span>
             {% endfor %}
             </td>
-            <td>{{rating.comment}}</td>
+            <td><i>{{rating.comment}}</i></td>
             
         </tr>
 
@@ -37,7 +37,9 @@
 
 
     </table>
-    <a href="/results/{{id}}" class="btn btn-outline-success"> go back</a>
+</div>
+
+    <a href="/results/{{id}}" class="btn btn-outline-success"> Go Back</a>
 
     </div>
 </body>

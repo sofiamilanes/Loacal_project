@@ -16,7 +16,7 @@
             <a href="/{{results.id}}/add_fav" class="btn btn-outline-success btn-sm">Add to Favorites <span class="fa fa-heart"></span> </a>
         {% endif %}
             <div class = "categories">
-                {{results.categories[0].title}}
+                <p>{{results.categories[0].title}}</p>
             </div>
 
             <div class = "scroll">
@@ -33,10 +33,10 @@
 
             <div id = 'rate'>
                 {% for num in range(average[0]|int)%}
-                <span class="fa fa-star checked"></span>
+                <big><span class="fa fa-star checked"></span></big>
                 {% endfor %}
                 {% for num in range(5 - average[0]|int)%}
-                <span class="fa fa-star"></span>
+                <big><span class="fa fa-star"></span></big>
                 {% endfor %}
                 <p>{{average}}</p>
             </div>
@@ -55,12 +55,12 @@
 
             <div class=" location-hours">
                 <div class="title-hours">
-                    <h5>Location & Hours</h5> 
+                    <h4><big>Location & Hours</big> </h4> 
                 </div>
                 <div class="row hour-info">
                     <div class = "col-4 address">
-                        <h5>Address: </h5>
-                        <address> 
+                        <h5><big>Address: </big> </h5>
+                        <p> 
                             {% for item in results.location.display_address%}
                             {{item}}
                             <br>
@@ -72,7 +72,7 @@
                                 <button type="submit" class ="btn btn-outline-success btn-sm"> Get Directions <span class="fa fa-car "></span></button>
                             </form>
                             {% endif %}
-                        </address>
+                        </p>
                     </div>
                             {% if 'hours' in results%}
                         <div class=" col-4 time">
@@ -101,7 +101,7 @@
                         </div>
                             {% endif %}
                             <div class = 'col-4 contact'>
-                                <h5>  Phone number :  </h5>
+                                <h5><big>Phone number:</big>    </h5>
                                 {% if results.display_phone != ''%}
                                 <p>  {{results.display_phone}}  </p>
                                 <a href="tel:{{results.phone}}"  class="btn btn-outline-success btn-sm"> Call Now <span class="fa fa-phone "></span></a>

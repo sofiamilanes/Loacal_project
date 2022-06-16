@@ -27,7 +27,9 @@ $(document).ready(function(){
         $( "div#pass-form" ).slideDown( 1050 );
         $( "div#rating-form" ).slideDown( 1050 );
         $( "div#rating-form" ).slideDown( 1050 );
+        $( ".rating_table" ).slideDown( 1050 );
         $( "div.all" ).toggle( 1050 );
+        // $( "h2" ).toggle( 1050 );
 
 
         // $( "div.img-container img" ).delay(500).fadeIn( 400 );

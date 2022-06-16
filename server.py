@@ -409,6 +409,8 @@ def updateinfo():
     lname = request.form['last_name']
     email = request.form['email']
     session['email'] = email
+    session["first_name"] = fname.title()
+
 
     
     new_user = crud.update_info(user.user_id,fname = fname, lname=lname, email=email)
